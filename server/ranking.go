@@ -59,8 +59,8 @@ func parseBooksRead(text string) ([]Book, error) {
 			return nil, err
 		}
 
-		// 21 = read count
-		if record[21] != "0" {
+		// 13 = date read
+		if record[13] != "" {
 			books = append(books, Book{
 				ID:     BookID(record[0]),
 				Title:  record[1],
