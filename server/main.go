@@ -118,7 +118,7 @@ func (p Player) updatePlayer(G map[PlayerID]float64, games []Game) (newR float64
 	return p.updateR(results, dSquared), p.updateRD(dSquared)
 }
 
-func main() {
+func run() {
 	competitors := []Player{
 		{
 			ID:     "1",
