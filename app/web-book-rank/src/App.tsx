@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import MainPage from "./features/MainPage";
+import StartPage from "./features/StartPage";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   const [loadedWasm, setLoadedWasm] = useState(false);
@@ -25,7 +27,13 @@ function App() {
     return <div>Loading...</div>;
   }
 
-  return <MainPage />;
+  return (
+    <Routes>
+      <Route path="/" element={<StartPage />} />
+      <Route path="/rank" element={<MainPage />} />
+    </Routes>
+  );
+  return <StartPage />;
 }
 
 export default App;

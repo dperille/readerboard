@@ -1,25 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function MainPage() {
   const [bookA, setBookA] = useState<any>();
   const [bookB, setBookB] = useState<any>();
 
-  const handleLibraryUpload = async (file: File) => {
-    if (!file) return;
-
-    const text = await file.text();
-    console.log(text);
-
-    const result = window.jsAddBooksFromCSV(text);
-  };
+  useEffect(() => {
+    getMatchup();
+  }, []);
 
   const getMatchup = () => {
     const result = window.jsGetMatchup();
     const data = JSON.parse(result);
 
-    console.log(data);
     setBookA(data.BookA.Title);
     setBookB(data.BookB.Title);
   };
@@ -36,24 +30,6 @@ export default function MainPage() {
           <p className="text-muted-foreground">
             Upload your library and rank books head-to-head.
           </p>
-        </div>
-
-        <Card>
-          <CardContent className="p-6">
-            <div className="space-y-4">
-              <h2 className="font-semibold">Library</h2>
-
-              <input
-                type="file"
-                accept=".csv"
-                onChange={(e) => handleLibraryUpload(e.target.files?.[0])}
-              />
-            </div>
-          </CardContent>
-        </Card>
-
-        <div className="flex justify-center">
-          <Button onClick={getMatchup}>Get Matchup</Button>
         </div>
 
         {bookA && bookB && (
