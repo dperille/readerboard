@@ -20,12 +20,16 @@ export default function MainPage() {
     console.log(data);
     setBookA(data.BookA.Title);
     setBookB(data.BookB.Title);
-  }
+  };
 
   return (
     <div>
       <button onClick={getMatchup}>Get matchup</button>
-      <p>{bookA} vs {bookB}</p>
+      <div style={{ display: "flex", flexDirection: "row", gap: "8px" }}>
+        <div>{bookA}</div>
+        <p>vs</p>
+        <div>{bookB}</div>
+      </div>
       <input
         type="file"
         accept=".csv"
