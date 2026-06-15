@@ -14,8 +14,10 @@ export default function MainPage() {
     const result = window.jsGetMatchup();
     const data = JSON.parse(result);
 
-    setBookA(data.BookA.Title);
-    setBookB(data.BookB.Title);
+    console.log(result);
+
+    setBookA(data.BookA.title);
+    setBookB(data.BookB.title);
   };
 
   const chooseWinner = (book) => {

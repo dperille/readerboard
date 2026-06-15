@@ -17,6 +17,12 @@ export default function StartPage() {
 
     const result = window.jsAddBooksFromCSV(text);
 
+    // Get the ranking session data, and store in localStorage
+    const session = JSON.parse(window.jsGetRankingData());
+    localStorage.setItem("session", JSON.stringify(session));
+
+    console.log("storing" + JSON.stringify(session));
+
     navigate("/rank");
   };
 

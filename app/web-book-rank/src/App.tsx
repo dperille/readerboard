@@ -3,6 +3,7 @@ import "./App.css";
 import MainPage from "./features/MainPage";
 import StartPage from "./features/StartPage";
 import { Route, Routes } from "react-router-dom";
+import RequireSession from "./RequireSession";
 
 function App() {
   const [loadedWasm, setLoadedWasm] = useState(false);
@@ -12,7 +13,7 @@ function App() {
       const goWasm = new window.Go();
       const result = await WebAssembly.instantiateStreaming(
         // /public/add.wasm -- copied from "go build" in server
-        fetch("add.wasm"),
+        fetch("main.wasm"),
         goWasm.importObject,
       );
 
@@ -30,10 +31,16 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<StartPage />} />
-      <Route path="/rank" element={<MainPage />} />
+      <Route
+        path="/rank"
+        element={
+          <RequireSession>
+            <MainPage />
+          </RequireSession>
+        }
+      />
     </Routes>
   );
-  return <StartPage />;
 }
 
 export default App;

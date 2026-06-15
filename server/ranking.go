@@ -10,9 +10,9 @@ import (
 )
 
 func (s *Server) randomBook() Book {
-	idx := rand.Intn(len(s.AllBooks))
+	idx := rand.Intn(len(s.Session))
 	var book Book
-	for _, b := range s.AllBooks {
+	for _, b := range s.Session {
 		if idx == 0 {
 			book = b
 			break
@@ -30,13 +30,9 @@ func (s *Server) chooseMatchup() Matchup {
 	}
 }
 
-func (s *Server) storeMatchupResult(result MatchupResult) {
-	s.UnprocessedResults = append(s.UnprocessedResults, result)
-}
-
 func (s *Server) addBooks(books []Book) {
 	for _, b := range books {
-		s.AllBooks[b.ID] = b
+		s.Session[b.ID] = b
 	}
 }
 

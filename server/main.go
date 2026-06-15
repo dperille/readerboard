@@ -7,12 +7,12 @@ import "syscall/js"
 type BookID string
 
 type Book struct {
-	ID     BookID // GoodReads includes an ID already - just use that for now
-	Title  string
-	Author string
+	ID     BookID `json:"bookId"`
+	Title  string `json:"title"`
+	Author string `json:"author"`
 
-	Rating float64
-	RD     float64
+	Rating float64 `json:"rating"`
+	RD     float64 `json:"rd"`
 }
 
 type Matchup struct {
@@ -26,19 +26,21 @@ type MatchupResult struct {
 	result float64 // todo - enum
 }
 
+type BookData map[BookID]Book
+
 type Server struct {
-	AllBooks           map[BookID]Book
-	UnprocessedResults []MatchupResult
+	Session map[BookID]Book `json:"session"`
 }
 
 func main() {
 	s := Server{
-		AllBooks:           make(map[BookID]Book, 0),
-		UnprocessedResults: make([]MatchupResult, 0),
+		Session: make(map[BookID]Book, 0),
 	}
 
 	js.Global().Set("jsAddBooksFromCSV", jsAddBooksFromCSV(s))
 	js.Global().Set("jsGetMatchup", jsGetMatchup(s))
+	js.Global().Set("jsGetRankingData", jsGetRankingData(s))
+	js.Global().Set("jsPutRankingData", jsPutRankingData(s))
 
 	<-make(chan bool) // keep program alive
 }
