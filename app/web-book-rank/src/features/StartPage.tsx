@@ -1,14 +1,28 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { wasmInstance } from "@/types/wasm";
-import { useRef } from "react";
+import { ArrowRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function StartPage() {
+  const [existingSession, setExistingSession] = useState(false);
+
   const navigate = useNavigate();
 
   const libraryInputRef = useRef<HTMLInputElement>(null);
   const sessionInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const checkPrevSession = () => {
+      const prevSession = localStorage.getItem("session");
+      if (prevSession) {
+        setExistingSession(true);
+      }
+    };
+
+    checkPrevSession();
+  }, []);
 
   const handleLibraryUpload = async (file: File) => {
     if (!file) return;
@@ -47,6 +61,13 @@ export default function StartPage() {
             </p>
           </div>
 
+          {existingSession && (
+            <Button variant="default" className="w-full h-32 bg-green-600 hover:bg-green-700" onClick={() => navigate("/rank")}>
+              Continue your saved session
+              <ArrowRight />
+            </Button>
+          )}
+
           <div className="grid gap-4 md:grid-cols-2">
             <Button
               size="lg"
@@ -62,7 +83,7 @@ export default function StartPage() {
               className="h-32"
               onClick={() => sessionInputRef.current?.click()}
             >
-              Resume From Saved Results
+              Upload saved results
             </Button>
           </div>
 
