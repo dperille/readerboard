@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Leaderboard } from "./Leaderboard";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import type { BookData } from "@/types/wasm";
 
-export default function LeaderboardView({ books }: any) {
+export default function LeaderboardView({ books }: { books: BookData }) {
   const [expanded, setExpanded] = useState(false);
 
   if (expanded) {

@@ -1,21 +1,18 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
+import type { Book } from "@/types/wasm";
 
 export default function BookVoteCard({
-  title,
-  author,
-  isbn,
+  book,
   handleVote,
   onRemoveBook,
 }: {
-  title: string;
-  author: string;
-  isbn: string;
+  book: Book;
   handleVote: () => void;
   onRemoveBook: () => void;
 }) {
-  const coverUrl = `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`;
+  const coverUrl = `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`;
 
   return (
     <Card className="group overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1">
@@ -24,16 +21,18 @@ export default function BookVoteCard({
           <div className="flex gap-4">
             <img
               src={coverUrl}
-              alt={`${title} cover`}
+              alt={`${book.title} cover`}
               className="h-32 w-24 rounded-md object-cover bg-muted shadow-sm"
             />
 
             <div className="flex flex-1 flex-col justify-center min-w-0">
               <h3 className="font-semibold text-lg leading-tight line-clamp-2">
-                {title}
+                {book.title}
               </h3>
 
-              <p className="mt-2 text-sm text-muted-foreground">{author}</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {book.author}
+              </p>
             </div>
           </div>
         </button>

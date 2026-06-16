@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import { wasmInstance } from "./types/wasm";
 
 export default function RequireSession({
   children,
@@ -11,7 +12,7 @@ export default function RequireSession({
     return <Navigate to="/" replace />;
   } else {
     // Load state into WASM
-    window.jsPutRankingData(sessionStr);
+    wasmInstance.putRankingData(sessionStr);
   }
 
   return children;

@@ -9,14 +9,21 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Share2, Download, Maximize2, Trophy, Minimize2 } from "lucide-react";
+import { wasmInstance, type BookData } from "@/types/wasm";
 
-export function Leaderboard({ books, expanded, handleExpand }: any) {
-  const sortedBooks = Object.values(books).sort(
-    (a: any, b: any) => b.rating - a.rating,
-  );
+export function Leaderboard({
+  books,
+  expanded,
+  handleExpand,
+}: {
+  books: BookData;
+  expanded: boolean;
+  handleExpand: () => void;
+}) {
+  const sortedBooks = Object.values(books).sort((a, b) => b.rating - a.rating);
 
   const handleDownload = () => {
-    const data = JSON.parse(window.jsGetRankingData());
+    const data = wasmInstance.getRankingData();
     const json = JSON.stringify(data, null, 2);
 
     const blob = new Blob([json], { type: "application/json" });
@@ -85,7 +92,7 @@ export function Leaderboard({ books, expanded, handleExpand }: any) {
           </TableHeader>
 
           <TableBody>
-            {sortedBooks.map((book: any, index: number) => (
+            {sortedBooks.map((book, index) => (
               <TableRow
                 key={book.bookId}
                 className="transition-colors hover:bg-muted/50"

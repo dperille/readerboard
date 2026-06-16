@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { wasmInstance } from "@/types/wasm";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,10 +14,10 @@ export default function StartPage() {
     if (!file) return;
 
     const text = await file.text();
-    const result = window.jsAddBooksFromCSV(text);
+    wasmInstance.addBooksFromCSV(text);
 
     // Get the parsed ranking data, and store in localStorage
-    const session = JSON.parse(window.jsGetRankingData());
+    const session = wasmInstance.getRankingData();
     localStorage.setItem("session", JSON.stringify(session));
 
     navigate("/rank");
@@ -26,13 +27,11 @@ export default function StartPage() {
     if (!file) return;
 
     const text = await file.text();
-    const result = window.jsPutRankingData(text);
+    wasmInstance.putRankingData(text);
 
     // Get the ranking data, and store in localStorage
-    const session = JSON.parse(window.jsGetRankingData());
+    const session = wasmInstance.getRankingData();
     localStorage.setItem("session", JSON.stringify(session));
-
-    console.log("session frontend: ", session);
 
     navigate("/rank");
   };
@@ -53,7 +52,6 @@ export default function StartPage() {
               size="lg"
               className="h-32"
               onClick={() => libraryInputRef.current?.click()}
-              onChange={(e) => handleLibraryUpload(e.target.files?.[0])}
             >
               Upload Library CSV
             </Button>

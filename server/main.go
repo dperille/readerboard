@@ -17,8 +17,8 @@ type Book struct {
 }
 
 type Matchup struct {
-	BookA Book
-	BookB Book
+	BookA Book `json:"bookA"`
+	BookB Book `json:"bookB"`
 }
 
 type MatchupResult struct {
@@ -38,12 +38,12 @@ func main() {
 		Session: make(map[BookID]Book, 0),
 	}
 
-	js.Global().Set("jsAddBooksFromCSV", jsAddBooksFromCSV(s))
-	js.Global().Set("jsGetMatchup", jsGetMatchup(s))
-	js.Global().Set("jsGetRankingData", jsGetRankingData(s))
-	js.Global().Set("jsPutRankingData", jsPutRankingData(s))
-	js.Global().Set("jsStoreMatchupResult", jsStoreMatchupResult(s))
-	js.Global().Set("jsRemoveBook", jsRemoveBook(s))
+	js.Global().Set("addBooksFromCSV", jsAddBooksFromCSV(s))
+	js.Global().Set("getMatchup", jsGetMatchup(s))
+	js.Global().Set("getRankingData", jsGetRankingData(s))
+	js.Global().Set("putRankingData", jsPutRankingData(s))
+	js.Global().Set("storeMatchupResult", jsStoreMatchupResult(s))
+	js.Global().Set("removeBook", jsRemoveBook(s))
 
 	<-make(chan bool) // keep program alive
 }
