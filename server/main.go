@@ -41,6 +41,7 @@ func main() {
 	js.Global().Set("jsGetMatchup", jsGetMatchup(s))
 	js.Global().Set("jsGetRankingData", jsGetRankingData(s))
 	js.Global().Set("jsPutRankingData", jsPutRankingData(s))
+	js.Global().Set("jsStoreMatchupResult", jsStoreMatchupResult(s))
 
 	<-make(chan bool) // keep program alive
 }

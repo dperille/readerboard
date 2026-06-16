@@ -4,6 +4,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"syscall/js"
 )
 
@@ -55,6 +56,31 @@ func jsPutRankingData(s Server) js.Func {
 
 		jsonStr := args[0].String()
 		s.putSnapshot(jsonStr)
+
+		return ""
+	})
+}
+
+func jsStoreMatchupResult(s Server) js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) any {
+		if len(args) != 3 {
+			return "Invalid number of arguments"
+		}
+
+		idBookA := BookID(args[0].String())
+		idBookB := BookID(args[1].String())
+		result := args[2].Float()
+
+		bookA := s.Session[idBookA]
+		bookB := s.Session[idBookB]
+		fmt.Println(bookA)
+		fmt.Println(bookB)
+
+		s.storeMatchupResult(MatchupResult{
+			BookA:  &bookA,
+			BookB:  &bookB,
+			result: result,
+		})
 
 		return ""
 	})

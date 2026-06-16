@@ -3,11 +3,15 @@
 package main
 
 import (
-	"encoding/csv"
-	"io"
 	"math/rand"
-	"strings"
 )
+
+func (s *Server) storeMatchupResult(result MatchupResult) {
+	books := make([]Book, 2)
+	books[0] = *result.BookA
+	books[1] = *result.BookB
+	update(books, []MatchupResult{result})
+}
 
 func (s *Server) randomBook() Book {
 	idx := rand.Intn(len(s.Session))
@@ -28,44 +32,4 @@ func (s *Server) chooseMatchup() Matchup {
 		s.randomBook(),
 		s.randomBook(),
 	}
-}
-
-func (s *Server) addBooks(books []Book) {
-	for _, b := range books {
-		s.Session[b.ID] = b
-	}
-}
-
-func parseBooksRead(text string) ([]Book, error) {
-	reader := csv.NewReader(strings.NewReader(text))
-
-	// TODO - use header
-	_, err := reader.Read()
-	if err != nil {
-		return nil, err
-	}
-
-	var books []Book
-	for {
-		record, err := reader.Read()
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			return nil, err
-		}
-
-		// 13 = date read
-		if record[13] != "" {
-			books = append(books, Book{
-				ID:     BookID(record[0]),
-				Title:  record[1],
-				Author: record[2],
-				Rating: DefaultRating,
-				RD:     DefaultRD,
-			})
-		}
-	}
-
-	return books, nil
 }
