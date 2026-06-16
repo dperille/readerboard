@@ -37,3 +37,7 @@ func (s *Server) chooseMatchup() Matchup {
 		s.randomBook(),
 	}
 }
+
+func (s *Server) removeBook(id BookID) {
+	delete(s.Session, id)
+}

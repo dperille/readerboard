@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { Leaderboard } from "./Leaderboard";
+import BookVoteCard from "./BookVoteCard";
 
 export default function MainPage() {
   const [session, setSession] = useState<any>({});
@@ -26,15 +27,22 @@ export default function MainPage() {
 
   const chooseWinnerA = () => {
     // TODO - should just return rating updates for those involved, rather than whole leaderboard
-    jsStoreMatchupResult(bookA.bookId, bookB.bookId, 1);
+    window.jsStoreMatchupResult(bookA.bookId, bookB.bookId, 1);
     updateLeaderboard();
     getMatchup();
   };
   const chooseWinnerB = () => {
-    jsStoreMatchupResult(bookB.bookId, bookA.bookId, 1);
+    window.jsStoreMatchupResult(bookB.bookId, bookA.bookId, 1);
     updateLeaderboard();
     getMatchup();
   };
+
+  const removeBook = (id: string) => {
+    window.jsRemoveBook(id);
+    updateLeaderboard();
+    getMatchup();
+  }
+
   return (
     <div className="container mx-auto max-w-7xl p-6">
       <div className="grid gap-8 lg:grid-cols-[1fr_350px]">
@@ -49,21 +57,18 @@ export default function MainPage() {
 
           {bookA && bookB && (
             <div className="grid gap-4 md:grid-cols-2">
-              <Button
-                variant="outline"
-                className="h-48 text-lg whitespace-normal"
-                onClick={() => chooseWinnerA()}
-              >
-                {bookA.title}
-              </Button>
-
-              <Button
-                variant="outline"
-                className="h-48 text-lg whitespace-normal"
-                onClick={() => chooseWinnerB()}
-              >
-                {bookB.title}
-              </Button>
+              <BookVoteCard
+                title={bookA.title}
+                author={bookA.author}
+                handleVote={() => chooseWinnerA()}
+                onRemoveBook={() => removeBook(bookA.bookId)}
+              />
+              <BookVoteCard
+                title={bookB.title}
+                author={bookB.author}
+                handleVote={() => chooseWinnerB()}
+                onRemoveBook={() => removeBook(bookB.bookId)}
+              />
             </div>
           )}
         </div>

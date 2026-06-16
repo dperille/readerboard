@@ -85,3 +85,16 @@ func jsStoreMatchupResult(s Server) js.Func {
 		return ""
 	})
 }
+
+func jsRemoveBook(s Server) js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) any {
+		if len(args) != 1 {
+			return "Invalid number of arguments"
+		}
+
+		bookId := BookID(args[0].String())
+		s.removeBook(bookId)
+
+		return ""
+	})
+}
