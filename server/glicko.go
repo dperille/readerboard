@@ -59,7 +59,7 @@ func (p Player) updateR(results []SelfResult, dSquared float64) float64 {
 		sum += result.oppG * (result.result - result.E)
 	}
 
-	return p.Rating + (q/((1/math.Pow(p.RD, 2))+(1/math.Pow(dSquared, 2))))*sum
+	return p.Rating + (q/((1/math.Pow(p.RD, 2))+(1/dSquared)))*sum
 }
 
 func (p Player) updateRD(dSquared float64) float64 {
