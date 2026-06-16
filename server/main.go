@@ -34,7 +34,7 @@ type Server struct {
 }
 
 func main() {
-	s := Server{
+	s := &Server{
 		Session: make(map[BookID]Book, 0),
 	}
 

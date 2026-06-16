@@ -15,7 +15,7 @@ export default function StartPage() {
     const text = await file.text();
     const result = window.jsAddBooksFromCSV(text);
 
-    // Get the ranking session data, and store in localStorage
+    // Get the parsed ranking data, and store in localStorage
     const session = JSON.parse(window.jsGetRankingData());
     localStorage.setItem("session", JSON.stringify(session));
 
@@ -23,7 +23,17 @@ export default function StartPage() {
   };
 
   const handleIntermediateUpload = async (file: File) => {
-    // TODO
+    if (!file) return;
+
+    const text = await file.text();
+    const result = window.jsPutRankingData(text);
+
+    // Get the ranking data, and store in localStorage
+    const session = JSON.parse(window.jsGetRankingData());
+    localStorage.setItem("session", JSON.stringify(session));
+
+    console.log("session frontend: ", session);
+
     navigate("/rank");
   };
 

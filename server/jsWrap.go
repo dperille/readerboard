@@ -8,7 +8,7 @@ import (
 	"syscall/js"
 )
 
-func jsAddBooksFromCSV(s Server) js.Func {
+func jsAddBooksFromCSV(s *Server) js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) any {
 		if len(args) != 1 {
 			return "Invalid number of arguments"
@@ -25,7 +25,7 @@ func jsAddBooksFromCSV(s Server) js.Func {
 	})
 }
 
-func jsGetMatchup(s Server) js.Func {
+func jsGetMatchup(s *Server) js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) any {
 		if len(args) != 0 {
 			return "Invalid number of arguments"
@@ -38,7 +38,7 @@ func jsGetMatchup(s Server) js.Func {
 	})
 }
 
-func jsGetRankingData(s Server) js.Func {
+func jsGetRankingData(s *Server) js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) any {
 		if len(args) != 0 {
 			return "Invalid number of arguments"
@@ -48,7 +48,7 @@ func jsGetRankingData(s Server) js.Func {
 	})
 }
 
-func jsPutRankingData(s Server) js.Func {
+func jsPutRankingData(s *Server) js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) any {
 		if len(args) != 1 {
 			return "Invalid number of arguments"
@@ -61,7 +61,7 @@ func jsPutRankingData(s Server) js.Func {
 	})
 }
 
-func jsStoreMatchupResult(s Server) js.Func {
+func jsStoreMatchupResult(s *Server) js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) any {
 		if len(args) != 3 {
 			return "Invalid number of arguments"
@@ -86,7 +86,7 @@ func jsStoreMatchupResult(s Server) js.Func {
 	})
 }
 
-func jsRemoveBook(s Server) js.Func {
+func jsRemoveBook(s *Server) js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) any {
 		if len(args) != 1 {
 			return "Invalid number of arguments"

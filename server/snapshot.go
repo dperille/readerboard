@@ -59,11 +59,13 @@ func parseBooksRead(text string) ([]Book, error) {
 }
 
 func (s *Server) putSnapshot(dataJson string) {
+	fmt.Println(dataJson)
 	var data BookData
 	err := json.Unmarshal([]byte(dataJson), &data)
 	if err != nil {
 		return
 	}
+	fmt.Println(data)
 
 	s.Session = data
 }

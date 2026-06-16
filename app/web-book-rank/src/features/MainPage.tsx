@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Leaderboard } from "./Leaderboard";
 import BookVoteCard from "./BookVoteCard";
 import LeaderboardView from "./LeaderboardView";
 

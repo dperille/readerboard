@@ -9,16 +9,30 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Share2, Download, Maximize2, Trophy, Minimize2 } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 export function Leaderboard({ books, expanded, handleExpand }: any) {
   const sortedBooks = Object.values(books).sort(
     (a: any, b: any) => b.rating - a.rating,
   );
+
+  const handleDownload = () => {
+    const data = JSON.parse(window.jsGetRankingData());
+    const json = JSON.stringify(data, null, 2);
+
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    // Create hidden link and inject into DOM to simulate clicking
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "bookrank.json";
+
+    document.body.appendChild(a);
+    a.click();
+
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
 
   const getRankStyle = (index: number) => {
     switch (index) {
@@ -48,7 +62,7 @@ export function Leaderboard({ books, expanded, handleExpand }: any) {
             <Share2 className="h-4 w-4" />
           </Button>
 
-          <Button variant="ghost" size="icon">
+          <Button onClick={() => handleDownload()} variant="ghost" size="icon">
             <Download className="h-4 w-4" />
           </Button>
 
