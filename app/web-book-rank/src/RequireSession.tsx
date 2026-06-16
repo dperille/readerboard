@@ -6,7 +6,6 @@ export default function RequireSession({
   children: React.ReactNode;
 }) {
   const sessionStr = localStorage.getItem("session");
-  console.log(sessionStr);
 
   if (sessionStr == null) {
     return <Navigate to="/" replace />;

@@ -3,7 +3,6 @@
 package main
 
 import (
-	"fmt"
 	"math"
 )
 
@@ -59,7 +58,7 @@ func (b Book) updateRD(dSquared float64) float64 {
 // Compute d^2 for each book
 // Then, for each book, do the update
 
-func update(competitors []Book, games []MatchupResult) {
+func update(competitors []Book, games []MatchupResult) map[BookID]Book {
 	// Compute all G values
 	G := make(map[BookID]float64)
 	for _, p := range competitors {
@@ -67,17 +66,20 @@ func update(competitors []Book, games []MatchupResult) {
 	}
 
 	// Do update for each player
+	// Can't update in-place, since we want to update all players for the rating period in parallel
+	updatedBooks := make(map[BookID]Book, len(competitors))
 	for _, b := range competitors {
 		newR, newRD := b.updatePlayer(G, games)
-		fmt.Printf(
-			"%s: [%f, %f] -> [%f, %f]\n",
-			b.ID,
-			b.Rating,
-			b.RD,
-			newR,
-			newRD,
-		)
+		updatedBooks[b.ID] = Book{
+			ID:     b.ID,
+			Title:  b.Title,
+			Author: b.Author,
+			Rating: newR,
+			RD:     newRD,
+		}
 	}
+
+	return updatedBooks
 }
 
 func (b Book) updatePlayer(

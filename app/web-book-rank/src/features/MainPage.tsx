@@ -14,15 +14,18 @@ export default function MainPage() {
     const result = window.jsGetMatchup();
     const data = JSON.parse(result);
 
-    console.log(result);
-
-    setBookA(data.BookA.title);
-    setBookB(data.BookB.title);
+    setBookA(data.BookA);
+    setBookB(data.BookB);
   };
 
-  const chooseWinner = (book) => {
+  const chooseWinnerA = () => {
+    jsStoreMatchupResult(bookA.bookId, bookB.bookId, 1);
     getMatchup();
   };
+  const chooseWinnerB = () => {
+    jsStoreMatchupResult(bookB.bookId, bookA.bookId, 1);
+    getMatchup();
+  }
 
   return (
     <div className="container mx-auto max-w-4xl p-6">
@@ -39,17 +42,17 @@ export default function MainPage() {
             <Button
               variant="outline"
               className="h-48 text-lg whitespace-normal"
-              onClick={() => chooseWinner(bookA)}
+              onClick={() => chooseWinnerA()}
             >
-              {bookA}
+              {bookA.title}
             </Button>
 
             <Button
               variant="outline"
               className="h-48 text-lg whitespace-normal"
-              onClick={() => chooseWinner(bookB)}
+              onClick={() => chooseWinnerB()}
             >
-              {bookB}
+              {bookB.title}
             </Button>
           </div>
         )}

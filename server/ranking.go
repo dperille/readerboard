@@ -10,7 +10,11 @@ func (s *Server) storeMatchupResult(result MatchupResult) {
 	books := make([]Book, 2)
 	books[0] = *result.BookA
 	books[1] = *result.BookB
-	update(books, []MatchupResult{result})
+
+	updatedBooks := update(books, []MatchupResult{result})
+	for id, b := range updatedBooks {
+		s.Session[id] = b
+	}
 }
 
 func (s *Server) randomBook() Book {
