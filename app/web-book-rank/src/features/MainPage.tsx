@@ -1,74 +1,18 @@
 import { useEffect, useState } from "react";
-import BookVoteCard from "./BookVoteCard";
 import LeaderboardView from "./LeaderboardView";
-import { wasmInstance, type Book, type BookData } from "@/types/wasm";
+import { wasmInstance, type BookData } from "@/types/wasm";
+import VotingArea from "./VotingArea";
 
 export default function MainPage() {
-  const [session, setSession] = useState<BookData>({});
-  const [bookA, setBookA] = useState<Book>();
-  const [bookB, setBookB] = useState<Book>();
-
-  const [nextBookA, setNextBookA] = useState<Book>();
-  const [nextBookB, setNextBookB] = useState<Book>();
+  const [data, setData] = useState<BookData>({});
 
   useEffect(() => {
-    updateLeaderboard();
-    getMatchup();
+    refreshLeaderboard();
   }, []);
 
-  const updateLeaderboard = () => {
+  const refreshLeaderboard = () => {
     const updatedStats = wasmInstance.getRankingData();
-    setSession(updatedStats);
-  };
-
-  const prefetchCover = async (isbn: string) => {
-    // Pre-fetch covers for next books to have image in browser cache
-    const img = new Image();
-    img.src = `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`;
-  };
-
-  const getMatchup = () => {
-    // Pre-fetch the next matchup so we can pre-fetch the images
-    const data = wasmInstance.getMatchup();
-
-    if (!bookA || !bookB) {
-      setBookA(data.bookA);
-      setBookB(data.bookB);
-
-      const next = wasmInstance.getMatchup();
-      setNextBookA(next.bookA);
-      setNextBookB(next.bookB);
-
-      prefetchCover(next.bookA.isbn);
-      prefetchCover(next.bookB.isbn);
-    } else {
-      setBookA(nextBookA);
-      setBookB(nextBookB);
-
-      setNextBookA(data.bookA);
-      setNextBookB(data.bookB);
-
-      prefetchCover(data.bookA.isbn);
-      prefetchCover(data.bookB.isbn);
-    }
-  };
-
-  const chooseWinnerA = () => {
-    // TODO - should just return rating updates for those involved, rather than whole leaderboard
-    wasmInstance.storeMatchupResult(bookA.bookId, bookB.bookId, 1);
-    updateLeaderboard();
-    getMatchup();
-  };
-  const chooseWinnerB = () => {
-    wasmInstance.storeMatchupResult(bookB.bookId, bookA.bookId, 1);
-    updateLeaderboard();
-    getMatchup();
-  };
-
-  const removeBook = (id: string) => {
-    wasmInstance.removeBook(id);
-    updateLeaderboard();
-    getMatchup();
+    setData(updatedStats);
   };
 
   return (
@@ -82,26 +26,12 @@ export default function MainPage() {
               Upload your library and rank books head-to-head.
             </p>
           </div>
-
-          {bookA && bookB && (
-            <div className="grid gap-4 md:grid-cols-2">
-              <BookVoteCard
-                book={bookA}
-                handleVote={() => chooseWinnerA()}
-                onRemoveBook={() => removeBook(bookA.bookId)}
-              />
-              <BookVoteCard
-                book={bookB}
-                handleVote={() => chooseWinnerB()}
-                onRemoveBook={() => removeBook(bookB.bookId)}
-              />
-            </div>
-          )}
+          <VotingArea refreshLeaderboard={refreshLeaderboard} />
         </div>
 
         {/* Leaderboard */}
         <div className="lg:sticky lg:top-6 lg:self-start">
-          <LeaderboardView books={session} />
+          <LeaderboardView books={data} />
         </div>
       </div>
     </div>
