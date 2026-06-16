@@ -8,14 +8,14 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Share2, Download, Maximize2, Trophy } from "lucide-react";
+import { Share2, Download, Maximize2, Trophy, Minimize2 } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-export function Leaderboard({ books, handleExpand }: any) {
+export function Leaderboard({ books, expanded, handleExpand }: any) {
   const sortedBooks = Object.values(books).sort(
     (a: any, b: any) => b.rating - a.rating,
   );
@@ -44,38 +44,18 @@ export function Leaderboard({ books, handleExpand }: any) {
         </div>
 
         <div className="flex items-center gap-1">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Share2 className="h-4 w-4" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Share</p>
-            </TooltipContent>
-          </Tooltip>
+          <Button variant="ghost" size="icon">
+            <Share2 className="h-4 w-4" />
+          </Button>
 
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Download className="h-4 w-4" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Download intermediate results to resume later</p>
-            </TooltipContent>
-          </Tooltip>
+          <Button variant="ghost" size="icon">
+            <Download className="h-4 w-4" />
+          </Button>
 
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon" onClick={handleExpand}>
-                <Maximize2 className="h-4 w-4" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Expand</p>
-            </TooltipContent>
-          </Tooltip>
+          <Button variant="ghost" size="icon" onClick={handleExpand}>
+            {expanded && <Minimize2 className="h-4 w-4" />}
+            {!expanded && <Maximize2 className="h-4 w-4" />}
+          </Button>
         </div>
       </CardHeader>
 

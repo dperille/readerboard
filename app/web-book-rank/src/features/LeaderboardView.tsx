@@ -12,14 +12,22 @@ export default function LeaderboardView({ books }: any) {
           showCloseButton={false}
           className="max-h-[90vh] flex flex-col min-w-full"
         >
-          <Leaderboard books={books} handleExpand={() => setExpanded(false)} />
+          <Leaderboard
+            books={books}
+            expanded={expanded}
+            handleExpand={() => setExpanded(false)}
+          />
         </DialogContent>
       </Dialog>
     );
   } else {
     return (
       <div className="h-screen overflow-hidden flex flex-col">
-        <Leaderboard books={books} handleExpand={() => setExpanded(true)} />
+        <Leaderboard
+          books={books}
+          expanded={expanded}
+          handleExpand={() => setExpanded(true)}
+        />
       </div>
     );
   }
