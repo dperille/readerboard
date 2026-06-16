@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Leaderboard } from "./Leaderboard";
 import BookVoteCard from "./BookVoteCard";
+import LeaderboardView from "./LeaderboardView";
 
 export default function MainPage() {
   const [session, setSession] = useState<any>({});
@@ -103,7 +104,7 @@ export default function MainPage() {
 
         {/* Leaderboard */}
         <div className="lg:sticky lg:top-6 lg:self-start">
-          <Leaderboard books={session} />
+          <LeaderboardView books={session} />
         </div>
       </div>
     </div>

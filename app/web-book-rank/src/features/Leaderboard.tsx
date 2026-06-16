@@ -15,7 +15,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-export function Leaderboard({ books }: any) {
+export function Leaderboard({ books, handleExpand }: any) {
   const sortedBooks = Object.values(books).sort(
     (a: any, b: any) => b.rating - a.rating,
   );
@@ -34,8 +34,8 @@ export function Leaderboard({ books }: any) {
   };
 
   return (
-    <Card className="overflow-hidden">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 border-b">
+    <Card className="h-full flex flex-col overflow-hidden">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 border-b shrink-0">
         <div>
           <h2 className="flex items-center gap-2 text-xl font-semibold">
             <Trophy className="h-5 w-5 text-yellow-500" />
@@ -68,7 +68,7 @@ export function Leaderboard({ books }: any) {
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" onClick={handleExpand}>
                 <Maximize2 className="h-4 w-4" />
               </Button>
             </TooltipTrigger>
@@ -79,7 +79,7 @@ export function Leaderboard({ books }: any) {
         </div>
       </CardHeader>
 
-      <CardContent className="p-0">
+      <CardContent className="flex-1 overflow-y-auto">
         <Table>
           <TableHeader>
             <TableRow>
