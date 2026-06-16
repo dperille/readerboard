@@ -10,6 +10,7 @@ type Book struct {
 	ID     BookID `json:"bookId"`
 	Title  string `json:"title"`
 	Author string `json:"author"`
+	Isbn   string `json:"isbn"`
 
 	Rating float64 `json:"rating"`
 	RD     float64 `json:"rd"`

@@ -74,6 +74,7 @@ func update(competitors []Book, games []MatchupResult) map[BookID]Book {
 			ID:     b.ID,
 			Title:  b.Title,
 			Author: b.Author,
+			Isbn:   b.Isbn,
 			Rating: newR,
 			RD:     newRD,
 		}

@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { Leaderboard } from "./Leaderboard";
 import BookVoteCard from "./BookVoteCard";
@@ -8,6 +6,9 @@ export default function MainPage() {
   const [session, setSession] = useState<any>({});
   const [bookA, setBookA] = useState<any>();
   const [bookB, setBookB] = useState<any>();
+
+  const [nextBookA, setNextBookA] = useState<any>();
+  const [nextBookB, setNextBookB] = useState<any>();
 
   useEffect(() => {
     getMatchup();
@@ -18,11 +19,36 @@ export default function MainPage() {
     setSession(updatedStats);
   };
 
+  const prefetchCover = async (isbn: string) => {
+    // Pre-fetch covers for next books to have image in browser cache
+    const img = new Image();
+    img.src = `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`;
+  };
+
   const getMatchup = () => {
+    // Pre-fetch the next matchup so we can pre-fetch the images
     const data = JSON.parse(window.jsGetMatchup());
 
-    setBookA(data.BookA);
-    setBookB(data.BookB);
+    if (!bookA || !bookB) {
+      setBookA(data.BookA);
+      setBookB(data.BookB);
+
+      const next = JSON.parse(window.jsGetMatchup());
+      setNextBookA(next.BookA);
+      setNextBookB(next.BookB);
+
+      prefetchCover(next.BookA.isbn);
+      prefetchCover(next.BookB.isbn);
+    } else {
+      setBookA(nextBookA);
+      setBookB(nextBookB);
+
+      setNextBookA(data.BookA);
+      setNextBookB(data.BookB);
+
+      prefetchCover(data.BookA.isbn);
+      prefetchCover(data.BookB.isbn);
+    }
   };
 
   const chooseWinnerA = () => {
@@ -41,7 +67,7 @@ export default function MainPage() {
     window.jsRemoveBook(id);
     updateLeaderboard();
     getMatchup();
-  }
+  };
 
   return (
     <div className="container mx-auto max-w-7xl p-6">
@@ -60,12 +86,14 @@ export default function MainPage() {
               <BookVoteCard
                 title={bookA.title}
                 author={bookA.author}
+                isbn={bookA.isbn}
                 handleVote={() => chooseWinnerA()}
                 onRemoveBook={() => removeBook(bookA.bookId)}
               />
               <BookVoteCard
                 title={bookB.title}
                 author={bookB.author}
+                isbn={bookB.isbn}
                 handleVote={() => chooseWinnerB()}
                 onRemoveBook={() => removeBook(bookB.bookId)}
               />

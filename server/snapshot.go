@@ -5,6 +5,7 @@ package main
 import (
 	"encoding/csv"
 	"encoding/json"
+	"fmt"
 	"io"
 	"strings"
 )
@@ -35,11 +36,19 @@ func parseBooksRead(text string) ([]Book, error) {
 		}
 
 		// 13 = date read
+		// 5 = ISBN, but prefixed with "= and suffixed with "; or none at all
+		var isbn string
+		if len(record[5]) > 3 {
+			fmt.Println(record[5])
+			isbn = record[5][2:(len(record[5]) - 1)]
+			fmt.Println(isbn)
+		}
 		if record[13] != "" {
 			books = append(books, Book{
 				ID:     BookID(record[0]),
 				Title:  record[1],
 				Author: record[2],
+				Isbn:   isbn,
 				Rating: DefaultRating,
 				RD:     DefaultRD,
 			})
