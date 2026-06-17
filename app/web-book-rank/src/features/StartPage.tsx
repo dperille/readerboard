@@ -51,69 +51,110 @@ export default function StartPage() {
   };
 
   return (
-    <div className="container mx-auto flex min-h-screen max-w-3xl items-center justify-center p-6">
-      <Card className="w-full">
-        <CardContent className="space-y-8 p-8">
-          <div className="text-center">
-            <h1 className="text-3xl font-bold">Book Ranker</h1>
-            <p className="text-muted-foreground mt-2">
-              Rank books head-to-head and build a personalized leaderboard.
-            </p>
-          </div>
+    <div className="container mx-auto flex-row max-w-3xl justify-center p-6">
+      <div className="pt-8 space-y-4 text-center">
+        <h1 className="text-5xl font-bold tracking-tight">📚 Readerboard</h1>
 
-          {existingSession && (
-            <Button variant="default" className="w-full h-32 bg-green-600 hover:bg-green-700" onClick={() => navigate("/rank")}>
-              Continue your saved session
-              <ArrowRight />
-            </Button>
-          )}
+        <p className="mx-auto mt-3 max-w-lg text-lg text-muted-foreground">
+          Compare books head-to-head and automatically build your personalized
+          reading leaderboard.
+        </p>
+      </div>
+      <div className="space-y-8 p-10">
+        {/* Continue session */}
+        {existingSession && (
+          <Card className="bg-green-500/10">
+            <CardContent className="flex flex-col p-5 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h3 className="font-medium">Saved session found</h3>
+                <p className="text-sm text-muted-foreground">
+                  Continue ranking where you left off.
+                </p>
+              </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            <Button
-              size="lg"
-              className="h-32"
-              onClick={() => libraryInputRef.current?.click()}
-            >
-              Upload Library CSV
-            </Button>
+              <Button onClick={() => navigate("/rank")} className="shrink-0">
+                Continue Session
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </CardContent>
+          </Card>
+        )}
 
-            <Button
-              size="lg"
-              variant="secondary"
-              className="h-32"
-              onClick={() => sessionInputRef.current?.click()}
-            >
-              Upload saved results
-            </Button>
-          </div>
+        {/* New session */}
+        <Card className="border-2">
+          <CardContent className="p-8">
+            <div className="space-y-4 text-center">
+              <h2 className="text-xl font-semibold">
+                Start a New Ranking Session
+              </h2>
 
-          <input
-            ref={libraryInputRef}
-            type="file"
-            accept=".csv"
-            className="hidden"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (!file) return;
+              <p className="text-muted-foreground">
+                Upload a CSV containing your Goodreads library and begin ranking
+                books.
+              </p>
 
-              handleLibraryUpload(file);
-            }}
-          />
+              <Button
+                size="lg"
+                className="h-14 w-full text-base"
+                onClick={() => libraryInputRef.current?.click()}
+              >
+                Upload Library CSV
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
-          <input
-            ref={sessionInputRef}
-            type="file"
-            accept=".json"
-            className="hidden"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (!file) return;
+        {/* Restore */}
+        <div className="space-y-3">
+          <h3 className="text-center text-sm font-medium text-muted-foreground">
+            Or restore previous results
+          </h3>
 
-              handleIntermediateUpload(file);
-            }}
-          />
-        </CardContent>
-      </Card>
+          <Card
+            className="cursor-pointer transition-all hover:border-primary hover:shadow-md"
+            onClick={() => sessionInputRef.current?.click()}
+          >
+            <CardContent className="flex items-center justify-between p-5">
+              <div>
+                <div className="font-medium">Import Saved Results</div>
+
+                <div className="text-sm text-muted-foreground">
+                  Resume from an exported ranking session.
+                </div>
+              </div>
+
+              <ArrowRight className="h-5 w-5 text-muted-foreground" />
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Hidden inputs to allow styling */}
+        <input
+          ref={libraryInputRef}
+          type="file"
+          accept=".csv"
+          className="hidden"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+
+            handleLibraryUpload(file);
+          }}
+        />
+
+        <input
+          ref={sessionInputRef}
+          type="file"
+          accept=".json"
+          className="hidden"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+
+            handleIntermediateUpload(file);
+          }}
+        />
+      </div>
     </div>
   );
 }

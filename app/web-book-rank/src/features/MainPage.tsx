@@ -21,9 +21,9 @@ export default function MainPage() {
         {/* Main ranking area */}
         <div className="space-y-8">
           <div className="text-center">
-            <h1 className="text-3xl font-bold">Book Ranker</h1>
+            <h1 className="text-3xl font-bold">📚 Readerboard</h1>
             <p className="text-muted-foreground">
-              Upload your library and rank books head-to-head.
+              Rank books head-to-head and build a personalized leaderboard.
             </p>
           </div>
           <VotingArea refreshLeaderboard={refreshLeaderboard} />
