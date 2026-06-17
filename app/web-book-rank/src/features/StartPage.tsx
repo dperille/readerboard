@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { wasmInstance } from "@/types/wasm";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -89,8 +89,17 @@ export default function StartPage() {
               </h2>
 
               <p className="text-muted-foreground">
-                Upload a CSV containing your Goodreads library and begin ranking
-                books.
+                Upload your{" "}
+                <a
+                  href="https://goodreads.com/review/import"
+                  rel="noreferrer"
+                  target="_blank" // new tab
+                  className="inline-flex items-center gap-1 text-primary underline underline-offset-4 hover:text-primary/80"
+                >
+                  exported Goodreads library
+                  <ExternalLink size={14} />
+                </a>{" "}
+                and begin ranking books.
               </p>
 
               <Button
