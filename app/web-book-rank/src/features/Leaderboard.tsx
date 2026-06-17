@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Share2, Download, Maximize2, Trophy, Minimize2 } from "lucide-react";
 import { wasmInstance, type BookData } from "@/types/wasm";
+import { ScrollArea } from "radix-ui";
 
 export function Leaderboard({
   books,
@@ -82,7 +83,7 @@ export function Leaderboard({
 
       <CardContent className="overflow-y-auto">
         <Table className="table-fixed">
-          <TableHeader className="sticky top-0">
+          <TableHeader className="sticky top-0 bg-background">
             <TableRow>
               <TableHead className="w-20">Rank</TableHead>
               <TableHead>Book</TableHead>
