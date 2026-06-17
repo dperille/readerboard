@@ -55,8 +55,8 @@ export function Leaderboard({
   };
 
   return (
-    <Card className="h-full flex flex-col overflow-hidden">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 border-b shrink-0">
+    <Card className="h-full">
+      <CardHeader className="flex flex-row items-center justify-between border-b">
         <div>
           <h2 className="flex items-center gap-2 text-xl font-semibold">
             <Trophy className="h-5 w-5 text-yellow-500" />
@@ -80,14 +80,13 @@ export function Leaderboard({
         </div>
       </CardHeader>
 
-      <CardContent className="flex-1 overflow-y-auto">
-        <Table>
-          <TableHeader>
+      <CardContent className="overflow-y-auto">
+        <Table className="table-fixed">
+          <TableHeader className="sticky top-0">
             <TableRow>
               <TableHead className="w-20">Rank</TableHead>
-              <TableHead>Title</TableHead>
-              <TableHead>Author</TableHead>
-              <TableHead className="text-right">Rating</TableHead>
+              <TableHead>Book</TableHead>
+              <TableHead className="w-16 text-right">Rating</TableHead>
             </TableRow>
           </TableHeader>
 
@@ -107,10 +106,11 @@ export function Leaderboard({
                   </div>
                 </TableCell>
 
-                <TableCell className="font-medium">{book.title}</TableCell>
-
-                <TableCell className="text-muted-foreground">
-                  {book.author}
+                <TableCell className="font-medium">
+                  <div className="flex flex-col truncate">
+                    <p>{book.title}</p>
+                    <p className="text-muted-foreground">{book.author}</p>
+                  </div>
                 </TableCell>
 
                 <TableCell className="text-right font-semibold">

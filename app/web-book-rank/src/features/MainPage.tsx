@@ -16,8 +16,8 @@ export default function MainPage() {
   };
 
   return (
-    <div className="container mx-auto max-w-7xl p-6">
-      <div className="grid gap-8 lg:grid-cols-[1fr_350px]">
+    <div className="container mx-auto max-w-8xl p-6 h-screen overflow-hidden">
+      <div className="grid gap-8 lg:grid-rows-1 lg:grid-cols-[3fr_2fr] h-full">
         {/* Main ranking area */}
         <div className="space-y-8">
           <div className="text-center">
@@ -30,7 +30,7 @@ export default function MainPage() {
         </div>
 
         {/* Leaderboard */}
-        <div className="lg:sticky lg:top-6 lg:self-start">
+        <div className="w-full h-full min-w-0">
           <LeaderboardView books={data} />
         </div>
       </div>

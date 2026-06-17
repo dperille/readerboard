@@ -11,7 +11,7 @@ export default function LeaderboardView({ books }: { books: BookData }) {
       <Dialog open={expanded} onOpenChange={setExpanded}>
         <DialogContent
           showCloseButton={false}
-          className="max-h-[90vh] flex flex-col min-w-full"
+          className="h-[95vh] min-w-[95vw] flex flex-col"
         >
           <Leaderboard
             books={books}
@@ -23,7 +23,7 @@ export default function LeaderboardView({ books }: { books: BookData }) {
     );
   } else {
     return (
-      <div className="h-screen overflow-hidden flex flex-col">
+      <div className="w-full h-full">
         <Leaderboard
           books={books}
           expanded={expanded}
