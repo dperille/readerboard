@@ -51,7 +51,7 @@ export default function VotingArea({
 
   return (
     matchup && (
-      <div className="h-full w-full grid gap-4 grid-rows-1 grid-cols-2 md:grid-cols-[1fr_auto_1fr]">
+      <div className="h-full w-full grid gap-4 grid-rows-2 grid-cols-1 md:grid-rows-1 md:grid-cols-[1fr_auto_1fr]">
         <BookVoteCard
           book={matchup.bookA}
           handleVote={() =>
@@ -59,6 +59,7 @@ export default function VotingArea({
           }
           onRemoveBook={() => removeBook(matchup.bookA.bookId)}
         />
+
         <div className="hidden md:flex items-center justify-center">
           <div className="flex flex-col items-center gap-2">
             <div className="rounded-full border bg-background px-3 py-2 shadow-sm">
@@ -69,6 +70,7 @@ export default function VotingArea({
             </div>
           </div>
         </div>
+
         <BookVoteCard
           book={matchup.bookB}
           handleVote={() =>

@@ -15,9 +15,9 @@ export default function BookVoteCard({
   const coverUrl = `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`;
 
   return (
-    <Card className="flex flex-col transition-all hover:shadow-lg hover:-translate-y-1">
+    <Card className="transition-all w-full hover:shadow-lg hover:-translate-y-1 p-0 md:p-2">
       <CardContent
-        className="relative flex flex-col flex-1 p-2 cursor-pointer"
+        className="relative flex md:flex-col flex-1 p-2 cursor-pointer"
         onClick={handleVote}
       >
         {/* Blur background */}
@@ -33,20 +33,25 @@ export default function BookVoteCard({
             aria-hidden
           />
         </div>
-        <div className="relative w-full flex-1 min-h-24">
+
+        <div className="relative w-28 md:w-full md:flex-1 min-h-24 shrink-0">
           <img
             src={coverUrl}
             className="absolute w-full h-full object-contain"
           />
         </div>
-        <div className="p-4 flex flex-col gap-1">
-          <h3 className="font-semibold leading-tight line-clamp-2">
-            {book.title}
-          </h3>
-          <p className="text-muted-foreground text-sm">{book.author}</p>
+
+        <div className="min-w-0 p-4">
+          <div className="flex flex-col gap-1">
+            <h3 className="font-semibold leading-tight text-base md:text-lg line-clamp-2">
+              {book.title}
+            </h3>
+            <p className="text-muted-foreground md:text-md">{book.author}</p>
+          </div>
         </div>
       </CardContent>
-      <CardFooter className="border-t px-4 py-3 flex shrink-0">
+
+      <CardFooter className="hidden md:flex border-t px-4 py-3 shrink-0">
         <Button
           variant="ghost"
           size="sm"
