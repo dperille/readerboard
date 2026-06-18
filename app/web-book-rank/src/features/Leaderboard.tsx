@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Share2, Download, Maximize2, Trophy, Minimize2 } from "lucide-react";
 import { wasmInstance, type BookData } from "@/types/wasm";
+import ConfidenceRing from "@/components/ConfidenceRing";
 
 export function Leaderboard({
   books,
@@ -86,7 +87,7 @@ export function Leaderboard({
             <TableRow>
               <TableHead className="w-20">Rank</TableHead>
               <TableHead>Book</TableHead>
-              <TableHead className="w-16 text-right">Rating</TableHead>
+              <TableHead className="w-20 text-right">Rating</TableHead>
             </TableRow>
           </TableHeader>
 
@@ -113,8 +114,12 @@ export function Leaderboard({
                   </div>
                 </TableCell>
 
-                <TableCell className="text-right font-semibold">
+                <TableCell className="text-right flex gap-2 font-semibold">
                   {book.rating.toFixed(0)}
+                  <ConfidenceRing
+                    size={22}
+                    confidence={100 / (1 + (book.rd / 150) ** 2)}
+                  />
                 </TableCell>
               </TableRow>
             ))}
