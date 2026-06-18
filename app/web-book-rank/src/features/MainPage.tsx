@@ -27,7 +27,7 @@ export default function MainPage() {
             </p>
           </div>
 
-          <div className="flex-1 max-h-150 px-4">
+          <div className="w-full flex-1 max-h-150 px-4">
             <VotingArea refreshLeaderboard={refreshLeaderboard} />
           </div>
         </div>

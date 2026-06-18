@@ -17,15 +17,23 @@ export default function BookVoteCard({
   return (
     <Card className="flex flex-col transition-all hover:shadow-lg hover:-translate-y-1">
       <CardContent
-        className="flex flex-col flex-1 p-2 cursor-pointer"
+        className="relative flex flex-col flex-1 p-2 cursor-pointer"
         onClick={handleVote}
       >
-        <div className="relative w-full flex-1 min-h-24">
+        {/* Blur background */}
+        <div className="absolute w-full h-full pointer-events-none">
           <img
             src={coverUrl}
-            className="absolute w-full h-full object-contain blur-xl scale-180 opacity-40"
+            className="
+          w-[150%]
+          h-[150%]
+          blur-xl
+          opacity-30
+        "
             aria-hidden
           />
+        </div>
+        <div className="relative w-full flex-1 min-h-24">
           <img
             src={coverUrl}
             className="absolute w-full h-full object-contain"
