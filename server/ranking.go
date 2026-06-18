@@ -1,5 +1,3 @@
-//go:build js && wasm
-
 package main
 
 import (
@@ -13,14 +11,14 @@ func (s *Server) storeMatchupResult(result MatchupResult) {
 
 	updatedBooks := update(books, []MatchupResult{result})
 	for id, b := range updatedBooks {
-		s.Session[id] = b
+		s.RatingData[id] = b
 	}
 }
 
 func (s *Server) randomBook() Book {
-	idx := rand.Intn(len(s.Session))
+	idx := rand.Intn(len(s.RatingData))
 	var book Book
-	for _, b := range s.Session {
+	for _, b := range s.RatingData {
 		if idx == 0 {
 			book = b
 			break
@@ -39,5 +37,5 @@ func (s *Server) chooseMatchup() Matchup {
 }
 
 func (s *Server) removeBook(id BookID) {
-	delete(s.Session, id)
+	delete(s.RatingData, id)
 }

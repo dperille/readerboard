@@ -4,7 +4,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"syscall/js"
 )
 
@@ -71,15 +70,13 @@ func jsStoreMatchupResult(s *Server) js.Func {
 		idBookB := BookID(args[1].String())
 		result := args[2].Float()
 
-		bookA := s.Session[idBookA]
-		bookB := s.Session[idBookB]
-		fmt.Println(bookA)
-		fmt.Println(bookB)
+		bookA := s.RatingData[idBookA]
+		bookB := s.RatingData[idBookB]
 
 		s.storeMatchupResult(MatchupResult{
 			BookA:  &bookA,
 			BookB:  &bookB,
-			result: result,
+			Result: result,
 		})
 
 		return ""

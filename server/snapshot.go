@@ -1,18 +1,15 @@
-//go:build js && wasm
-
 package main
 
 import (
 	"encoding/csv"
 	"encoding/json"
-	"fmt"
 	"io"
 	"strings"
 )
 
 func (s *Server) addBooks(books []Book) {
 	for _, b := range books {
-		s.Session[b.ID] = b
+		s.RatingData[b.ID] = b
 	}
 }
 
@@ -39,9 +36,7 @@ func parseBooksRead(text string) ([]Book, error) {
 		// 5 = ISBN, but prefixed with "= and suffixed with "; or none at all
 		var isbn string
 		if len(record[5]) > 3 {
-			fmt.Println(record[5])
 			isbn = record[5][2:(len(record[5]) - 1)]
-			fmt.Println(isbn)
 		}
 		if record[13] != "" {
 			books = append(books, Book{
@@ -59,18 +54,16 @@ func parseBooksRead(text string) ([]Book, error) {
 }
 
 func (s *Server) putSnapshot(dataJson string) {
-	fmt.Println(dataJson)
 	var data BookData
 	err := json.Unmarshal([]byte(dataJson), &data)
 	if err != nil {
 		return
 	}
-	fmt.Println(data)
 
-	s.Session = data
+	s.RatingData = data
 }
 
 func (s *Server) exportSnapshot() string {
-	str, _ := json.Marshal(s.Session)
+	str, _ := json.Marshal(s.RatingData)
 	return string(str)
 }
