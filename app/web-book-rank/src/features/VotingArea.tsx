@@ -51,35 +51,31 @@ export default function VotingArea({
 
   return (
     matchup && (
-      <div className="grid gap-4 grid-rows-1 grid-cols-2 md:grid-cols-[1fr_auto_1fr] items-center">
-        <div className="flex">
-          <BookVoteCard
-            book={matchup.bookA}
-            handleVote={() =>
-              chooseWinner(matchup.bookA.bookId, matchup.bookB.bookId)
-            }
-            onRemoveBook={() => removeBook(matchup.bookA.bookId)}
-          />
-        </div>
+      <div className="h-full w-full grid gap-4 grid-rows-1 grid-cols-2 md:grid-cols-[1fr_auto_1fr]">
+        <BookVoteCard
+          book={matchup.bookA}
+          handleVote={() =>
+            chooseWinner(matchup.bookA.bookId, matchup.bookB.bookId)
+          }
+          onRemoveBook={() => removeBook(matchup.bookA.bookId)}
+        />
         <div className="hidden md:flex items-center justify-center">
           <div className="flex flex-col items-center gap-2">
             <div className="rounded-full border bg-background px-3 py-2 shadow-sm">
-              <Swords size={20}/>
+              <Swords size={20} />
             </div>
             <div className="text-xs text-muted-foreground tracking-widest">
               VS
             </div>
           </div>
         </div>
-        <div className="flex">
-          <BookVoteCard
-            book={matchup.bookB}
-            handleVote={() =>
-              chooseWinner(matchup.bookB.bookId, matchup.bookA.bookId)
-            }
-            onRemoveBook={() => removeBook(matchup.bookB.bookId)}
-          />
-        </div>
+        <BookVoteCard
+          book={matchup.bookB}
+          handleVote={() =>
+            chooseWinner(matchup.bookB.bookId, matchup.bookA.bookId)
+          }
+          onRemoveBook={() => removeBook(matchup.bookB.bookId)}
+        />
       </div>
     )
   );

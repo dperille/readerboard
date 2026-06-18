@@ -82,7 +82,7 @@ export function Leaderboard({
 
       <CardContent className="overflow-y-auto">
         <Table className="table-fixed">
-          <TableHeader className="sticky top-0 bg-background">
+          <TableHeader className="md:sticky md:top-0 md:bg-background">
             <TableRow>
               <TableHead className="w-20">Rank</TableHead>
               <TableHead>Book</TableHead>

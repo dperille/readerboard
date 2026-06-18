@@ -15,15 +15,15 @@ export default function BookVoteCard({
   const coverUrl = `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`;
 
   return (
-    <Card className="w-full h-full overflow-hidden">
+    <Card className="flex flex-col transition-all hover:shadow-lg hover:-translate-y-1">
       <CardContent
-        className="flex flex-col flex-1 p-2 cursor-pointer group min-h-0"
+        className="flex flex-col flex-1 p-2 cursor-pointer"
         onClick={handleVote}
       >
-        <div className="relative w-full aspect-3/4">
+        <div className="relative w-full flex-1 min-h-24">
           <img
             src={coverUrl}
-            className="absolute w-full h-full object-contain blur-3xl scale-150 opacity-30"
+            className="absolute w-full h-full object-contain blur-xl scale-180 opacity-40"
             aria-hidden
           />
           <img
@@ -38,7 +38,7 @@ export default function BookVoteCard({
           <p className="text-muted-foreground text-sm">{book.author}</p>
         </div>
       </CardContent>
-      <CardFooter className="border-t px-4 py-3 flex">
+      <CardFooter className="border-t px-4 py-3 flex shrink-0">
         <Button
           variant="ghost"
           size="sm"
