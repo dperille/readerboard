@@ -87,7 +87,7 @@ export function Leaderboard({
             <TableRow>
               <TableHead className="w-20">Rank</TableHead>
               <TableHead>Book</TableHead>
-              <TableHead className="w-20 text-right">Rating</TableHead>
+              <TableHead className="w-20">Rating</TableHead>
             </TableRow>
           </TableHeader>
 
@@ -114,7 +114,7 @@ export function Leaderboard({
                   </div>
                 </TableCell>
 
-                <TableCell className="text-right flex gap-2 font-semibold">
+                <TableCell className="text-right flex gap-2 font-semibold justify-between">
                   {book.rating.toFixed(0)}
                   <ConfidenceRing
                     size={22}
