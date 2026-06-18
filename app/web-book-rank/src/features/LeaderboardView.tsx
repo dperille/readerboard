@@ -23,7 +23,7 @@ export default function LeaderboardView({ books }: { books: BookData }) {
     );
   } else {
     return (
-      <div className="w-full h-full">
+      <div className="h-full">
         <Leaderboard
           books={books}
           expanded={expanded}
