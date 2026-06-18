@@ -43,10 +43,10 @@ export default function BookVoteCard({
 
         <div className="min-w-0 p-4">
           <div className="flex flex-col gap-1">
-            <h3 className="font-semibold leading-tight text-base md:text-lg line-clamp-2">
+            <h3 className="font-semibold leading-tight text-base md:text-xl line-clamp-2">
               {book.title}
             </h3>
-            <p className="text-muted-foreground md:text-md">{book.author}</p>
+            <p className="text-muted-foreground md:text-lg">{book.author}</p>
           </div>
         </div>
       </CardContent>
