@@ -33,7 +33,7 @@ export function Leaderboard({
     // Create hidden link and inject into DOM to simulate clicking
     const a = document.createElement("a");
     a.href = url;
-    a.download = "bookrank.json";
+    a.download = "readerboard.json";
 
     document.body.appendChild(a);
     a.click();

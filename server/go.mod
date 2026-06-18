@@ -1,3 +1,3 @@
-module example/book-rank
+module example/readerboard
 
 go 1.25.1
