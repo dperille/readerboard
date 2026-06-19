@@ -14,5 +14,6 @@ declare global {
     putRankingData(jsonData: string): void;
     storeMatchupResult(bookA: BookId, bookB: BookId, result: number): void;
     removeBook(bookId: BookId): void;
+    undo(): number;
   }
 }

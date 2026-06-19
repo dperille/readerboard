@@ -36,4 +36,7 @@ export const wasmInstance = {
   removeBook(bookId: BookId): void {
     window.removeBook(bookId);
   },
+  undo(): number {
+    window.undo();
+  }
 };
