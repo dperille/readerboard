@@ -14,7 +14,7 @@ export default function BookVoteCard({
   onRemoveBook: () => void;
 }) {
   return (
-    <Card className="transition-all w-full hover:shadow-lg hover:-translate-y-1 p-0 md:p-2">
+    <Card className="transition-all w-full hover:shadow-lg hover:-translate-y-1 p-0 md:p-2 dark:border dark:border-border">
       <CardContent
         className="relative flex md:flex-col flex-1 p-2 cursor-pointer"
         onClick={handleVote}

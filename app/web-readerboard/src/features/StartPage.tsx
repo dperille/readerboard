@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { ThemeSwitch } from "@/components/ui/ThemeToggle";
 import { wasmInstance } from "@/types/wasm";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -52,7 +53,8 @@ export default function StartPage() {
 
   return (
     <div className="container mx-auto flex-row max-w-3xl justify-center p-6">
-      <div className="pt-8 space-y-4 text-center">
+      <div className="flex flex-col items-center pt-4 space-y-4 text-center">
+        <ThemeSwitch />
         <h1 className="text-5xl font-bold tracking-tight">📚 Readerboard</h1>
 
         <p className="mx-auto mt-3 max-w-lg text-lg text-muted-foreground">
@@ -63,7 +65,7 @@ export default function StartPage() {
       <div className="space-y-8 p-10">
         {/* Continue session */}
         {existingSession && (
-          <Card className="bg-green-500/10">
+          <Card className="bg-green-500/30">
             <CardContent className="flex flex-col p-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h3 className="font-medium">Saved session found</h3>
