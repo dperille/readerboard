@@ -101,7 +101,9 @@ export default function StartPage() {
                   exported Goodreads library
                   <ExternalLink size={14} />
                 </a>{" "}
-                and begin ranking books.
+                and begin ranking books. <br />
+                Ranking data is processed in your browser and is not sent to any
+                server.
               </p>
 
               <Button
