@@ -6,6 +6,18 @@ stars in reviews nobody reads?
 Readerboard lets you generate a decisive ranking of all your read books simply by comparing them head-to-head. No more "everything is 4 stars."
 Somebody must win.
 
+<table>
+  <tr>
+    <td width="50%">
+      <img width="100%" alt="Readerboard light mode" src="https://github.com/user-attachments/assets/1e55b3f9-6a95-45e0-9c62-a5cf4d52b81a" />
+    </td>
+    <td width="50%">
+      <img width="100%" alt="Readerboard dark mode" src="https://github.com/user-attachments/assets/41f1e3a9-9854-4395-87c3-d85cd94bf440" />
+    </td>
+  </tr>
+</table>
+
+
 ### Ratings
 
 Ratings follow the original [Glicko system](https://www.glicko.net/glicko/glicko.pdf) devised by Dr. Mark Glickman. The model is akin to Elo:
