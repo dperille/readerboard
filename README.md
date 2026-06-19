@@ -29,3 +29,13 @@ amount of logic, likely isn't any faster, and makes the architecture unnecessari
 
 The frontend is built in React with the help of Tailwind and Shadcn. It holds no meaningful state and defers all rating logic & matchup selection to the Go rating engine.
 It also acts as a proxy between saved sessions (either auto-saved to "persistent" local storage, or manually exported as JSON) and the Go engine, allowing users to save/resume.
+
+#### TODOs
+This is just a small side project, but if I ever get around to it (in no particular order):
+- Auto-save / warning on page exit
+- Arrow keys to choose
+- Smarter matchup selection: close pairs, highest RD, etc.
+- Animate leaderboard
+- Share as text or image
+- Error messaging
+- Undo actually restores previous matchups / indicates action being undone
