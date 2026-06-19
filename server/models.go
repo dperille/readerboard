@@ -18,13 +18,19 @@ type Matchup struct {
 }
 
 type MatchupResult struct {
-	BookA  *Book   `json:"bookA"`
-	BookB  *Book   `json:"bookB"`
+	BookA  Book   `json:"bookA"`
+	BookB  Book   `json:"bookB"`
 	Result float64 `json:"result"`
 }
 
 type BookData map[BookID]Book
 
 type Server struct {
-	RatingData map[BookID]Book `json:"ratingData"`
+	RatingData map[BookID]Book
+	LastActions []State // most recent action on end
+}
+
+// Stores state of some subset of books at a given time to restore from
+type State struct {
+	Books []Book
 }

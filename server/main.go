@@ -15,6 +15,7 @@ func main() {
 	js.Global().Set("putRankingData", jsPutRankingData(s))
 	js.Global().Set("storeMatchupResult", jsStoreMatchupResult(s))
 	js.Global().Set("removeBook", jsRemoveBook(s))
+	js.Global().Set("undo", jsUndo(s))
 
 	<-make(chan bool) // keep program alive
 }

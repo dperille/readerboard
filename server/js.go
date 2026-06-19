@@ -70,14 +70,7 @@ func jsStoreMatchupResult(s *Server) js.Func {
 		idBookB := BookID(args[1].String())
 		result := args[2].Float()
 
-		bookA := s.RatingData[idBookA]
-		bookB := s.RatingData[idBookB]
-
-		s.storeMatchupResult(MatchupResult{
-			BookA:  &bookA,
-			BookB:  &bookB,
-			Result: result,
-		})
+		s.storeMatchupResult(idBookA, idBookB, result)
 
 		return ""
 	})
@@ -93,5 +86,15 @@ func jsRemoveBook(s *Server) js.Func {
 		s.removeBook(bookId)
 
 		return ""
+	})
+}
+
+func jsUndo(s *Server) js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) any {
+		if len(args) != 0 {
+			return "Invalid number of arguments"
+		}
+
+		return s.undo()
 	})
 }

@@ -54,13 +54,13 @@ func getSelfMatches(b Book, gWeights map[BookID]float64, games []MatchupResult) 
 		if game.BookA.ID == b.ID {
 			results = append(results, SelfResult{
 				oppGWeight: gWeights[game.BookB.ID],
-				expected:   b.expectedScore(*game.BookB, gWeights[game.BookB.ID]),
+				expected:   b.expectedScore(game.BookB, gWeights[game.BookB.ID]),
 				result:     game.Result,
 			})
 		} else if game.BookB.ID == b.ID {
 			results = append(results, SelfResult{
 				oppGWeight: gWeights[game.BookA.ID],
-				expected:   b.expectedScore(*game.BookA, gWeights[game.BookA.ID]),
+				expected:   b.expectedScore(game.BookA, gWeights[game.BookA.ID]),
 				result:     1 - game.Result,
 			})
 		}
