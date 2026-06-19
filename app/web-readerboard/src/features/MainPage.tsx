@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import LeaderboardView from "./LeaderboardView";
 import { wasmInstance, type BookData } from "@/types/wasm";
 import VotingArea from "./VotingArea";
+import { HomeIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function MainPage() {
+  const navigate = useNavigate();
+
   const [data, setData] = useState<BookData>({});
 
   useEffect(() => {
@@ -21,7 +25,12 @@ export default function MainPage() {
         {/* Ranking Area */}
         <div className="flex min-h-0 flex-2 flex-col space-y-4 items-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold">📚 Readerboard</h1>
+            <h1
+              className="text-3xl font-bold hover:text-muted-foreground cursor-pointer"
+              onClick={() => navigate("/")}
+            >
+              📚 Readerboard
+            </h1>
             <p className="text-muted-foreground">
               Rank books head-to-head and build a personalized leaderboard.
             </p>
