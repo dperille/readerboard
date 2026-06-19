@@ -2,20 +2,13 @@
 
 import { Moon, Sun } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
-import { useEffect, useState } from "react";
 import { useTheme } from "../theme-provider";
 
 export function ThemeSwitch() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { theme, resolvedTheme, setTheme } = useTheme();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
-  const isDark = theme === "dark";
+  const isDark =
+    theme === "dark" || (theme === "system" && resolvedTheme === "dark");
 
   return (
     <div className="flex items-center gap-2">
