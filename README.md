@@ -1,4 +1,5 @@
 # Readerboard
+**[Try it live](https://readerboard.knoll.workers.dev/)**
 
 Love to read? Hate reducing your complex, objectively-correct opinions on books to out-of-5 star ratings? Tired of qualifying with fractional
 stars in reviews nobody reads?
