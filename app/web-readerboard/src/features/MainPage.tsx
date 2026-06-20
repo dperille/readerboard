@@ -23,9 +23,9 @@ export default function MainPage() {
     <div className="h-screen max-w-8xl mx-auto p-4">
       <div className="flex h-full flex-col gap-4 lg:flex-row">
         {/* Ranking area - includes header to give leaderboard more prominence */}
-        <div className="flex min-h-0 flex-2 flex-col space-y-4">
+        <div className="flex min-h-0 flex-2 flex-col space-y-4 items-center">
           {/* Header */}
-          <div className="flex md:flex-col items-center justify-between">
+          <div className="w-full flex flex-row-reverse md:flex-col items-center space-y-2 justify-between">
             <ThemeSwitch />
             <div className="text-center">
               <h1
