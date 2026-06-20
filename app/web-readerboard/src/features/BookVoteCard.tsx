@@ -14,19 +14,19 @@ export default function BookVoteCard({
   onRemoveBook: () => void;
 }) {
   return (
-    <Card className="min-h-0 transition-all w-full hover:shadow-lg hover:-translate-y-1 p-0 md:p-2 dark:border dark:border-border">
+    <Card className="transition-all w-full hover:shadow-lg hover:-translate-y-1 p-0 md:p-2 dark:border dark:border-border">
       <CardContent
-        className="min-h-0 relative flex md:flex-col flex-1 p-2 cursor-pointer"
+        className="min-h-0 h-full w-full md:items-center relative flex md:flex-col flex-1 p-2 cursor-pointer"
         onClick={handleVote}
       >
         <BookCover book={book} />
 
-        <div className="min-w-0 p-4">
+        <div className="min-w-0 flex flex-col gap-1 p-4 flex-1 w-full min-h-0 md:flex-none">
           <div className="flex flex-col gap-1">
-            <h3 className="font-semibold leading-tight text-base md:text-xl line-clamp-2">
+            <h3 className="font-semibold leading-tight text-base md:text-xl line-clamp-3 md:line-clamp-2">
               {book.title}
             </h3>
-            <p className="text-muted-foreground md:text-lg">{book.author}</p>
+            <p className="text-muted-foreground md:text-lg line-clamp-1">{book.author}</p>
           </div>
         </div>
       </CardContent>

@@ -65,7 +65,7 @@ export default function StartPage() {
       <div className="space-y-8 p-10">
         {/* Continue session */}
         {existingSession && (
-          <Card className="bg-green-500/30">
+          <Card>
             <CardContent className="flex flex-col p-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h3 className="font-medium">Saved session found</h3>
