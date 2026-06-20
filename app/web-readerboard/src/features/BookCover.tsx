@@ -4,11 +4,11 @@ export default function BookCover({ book }: { book: Book }) {
   // Default cover
   if (book.isbn.length == 0) {
     return (
-      <div className="relative h-full bg-[#f4ecd8] border border-[#d6c7a6] shadow-lg overflow-hidden font-mono text-[#2b2b2b]">
+      <div className="min-h-0 relative bg-[#f4ecd8] border border-[#d6c7a6] shadow-lg overflow-hidden font-mono text-[#2b2b2b]">
         {/* Paper texture */}
         <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,rgba(0,0,0,0.03),rgba(0,0,0,0.03)_1px,transparent_1px,transparent_6px)]" />
 
-        <div className="relative h-full p-3 flex flex-col justify-between">
+        <div className="relative p-3 flex flex-col justify-between">
           <div className="text-[10px] tracking-[0.2em] opacity-70">
             LIBRARY PROPERTY
           </div>

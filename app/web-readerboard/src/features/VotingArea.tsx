@@ -65,7 +65,7 @@ export default function VotingArea({
 
   return (
     matchup && (
-      <div className="h-full w-full grid gap-4 grid-rows-[1fr_auto_1fr] grid-cols-1 md:grid-rows-1 md:grid-cols-[1fr_auto_1fr]">
+      <div className="h-full w-full min-h-0 grid gap-4 grid-rows-[1fr_auto_1fr] grid-cols-1 md:grid-rows-1 md:grid-cols-[1fr_auto_1fr]">
         <BookVoteCard
           book={matchup.bookA}
           handleVote={() =>
