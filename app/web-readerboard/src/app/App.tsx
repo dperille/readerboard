@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import MainPage from "./features/MainPage";
-import StartPage from "./features/StartPage";
+import MainPage from "@/features/voting/MainPage";
+import StartPage from "@/features/landing/StartPage";
 import { Route, Routes } from "react-router-dom";
-import RequireSession from "./RequireSession";
+import RequireSession from "@/app/RequireSession";
 
 function App() {
   const [loadedWasm, setLoadedWasm] = useState(false);

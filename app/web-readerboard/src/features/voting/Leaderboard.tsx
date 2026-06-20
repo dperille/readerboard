@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Share2, Download, Maximize2, Trophy, Minimize2 } from "lucide-react";
 import { wasmInstance, type BookData } from "@/types/wasm";
-import ConfidenceRing from "@/components/ConfidenceRing";
+import ConfidenceRing from "@/features/voting/ConfidenceRing";
 
 export function Leaderboard({
   books,

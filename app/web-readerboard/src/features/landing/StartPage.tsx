@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ThemeSwitch } from "@/components/ui/ThemeToggle";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { wasmInstance } from "@/types/wasm";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -54,7 +54,7 @@ export default function StartPage() {
   return (
     <div className="container mx-auto max-w-3xl flex-row justify-center p-6">
       <div className="flex flex-col items-center space-y-4 pt-4 text-center">
-        <ThemeSwitch />
+        <ThemeToggle />
         <h1 className="text-5xl font-bold tracking-tight">📚 Readerboard</h1>
 
         <p className="text-muted-foreground mx-auto mt-3 max-w-lg text-lg">

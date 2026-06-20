@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { wasmInstance } from "./types/wasm";
+import { wasmInstance } from "@/types/wasm";
 
 export default function RequireSession({
   children,

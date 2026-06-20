@@ -3,7 +3,7 @@ import LeaderboardView from "./LeaderboardView";
 import { wasmInstance, type BookData } from "@/types/wasm";
 import VotingArea from "./VotingArea";
 import { useNavigate } from "react-router-dom";
-import { ThemeSwitch } from "@/components/ui/ThemeToggle";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function MainPage() {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ export default function MainPage() {
       <div className="flex min-h-0 flex-2 flex-col items-center space-y-4">
         {/* Header */}
         <div className="flex w-full flex-row-reverse items-center justify-between space-y-2 md:flex-col">
-          <ThemeSwitch />
+          <ThemeToggle />
           <div className="text-center">
             <h1
               className="hover:text-muted-foreground cursor-pointer text-3xl font-bold"
