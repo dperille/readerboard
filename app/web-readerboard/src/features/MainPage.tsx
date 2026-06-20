@@ -20,32 +20,32 @@ export default function MainPage() {
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col lg:flex-row max-w-8xl mx-auto p-4 pb-0 gap-4">
+    <div className="max-w-8xl mx-auto flex h-screen w-screen flex-col gap-4 p-4 pb-0 lg:flex-row">
       {/* Ranking area - includes header to give leaderboard more prominence */}
-      <div className="flex flex-2 flex-col min-h-0 items-center space-y-4">
+      <div className="flex min-h-0 flex-2 flex-col items-center space-y-4">
         {/* Header */}
-        <div className="w-full flex flex-row-reverse md:flex-col items-center space-y-2 justify-between">
+        <div className="flex w-full flex-row-reverse items-center justify-between space-y-2 md:flex-col">
           <ThemeSwitch />
           <div className="text-center">
             <h1
-              className="text-3xl font-bold hover:text-muted-foreground cursor-pointer"
+              className="hover:text-muted-foreground cursor-pointer text-3xl font-bold"
               onClick={() => navigate("/")}
             >
               📚 Readerboard
             </h1>
-            <p className="hidden md:flex text-muted-foreground">
+            <p className="text-muted-foreground hidden md:flex">
               Rank books head-to-head and build a personalized leaderboard.
             </p>
           </div>
         </div>
 
-        <div className="min-h-0 w-full max-w-4xl lg:max-h-[80vh] lg:items-center lg:justify-center flex-1 lg:py-10">
+        <div className="min-h-0 w-full max-w-4xl flex-1 lg:max-h-[80vh] lg:items-center lg:justify-center lg:py-10">
           <VotingArea refreshLeaderboard={refreshLeaderboard} />
         </div>
       </div>
 
       {/* Leaderboard */}
-      <div className="flex-1 min-h-0">
+      <div className="min-h-0 flex-1">
         <LeaderboardView books={data} />
       </div>
     </div>

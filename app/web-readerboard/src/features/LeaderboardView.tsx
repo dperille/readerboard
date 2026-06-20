@@ -11,7 +11,7 @@ export default function LeaderboardView({ books }: { books: BookData }) {
       <Dialog open={expanded} onOpenChange={setExpanded}>
         <DialogContent
           showCloseButton={false}
-          className="h-[95vh] min-w-[95vw] flex flex-col"
+          className="flex h-[95vh] min-w-[95vw] flex-col"
         >
           <Leaderboard
             books={books}

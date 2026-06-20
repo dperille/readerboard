@@ -83,7 +83,7 @@ export function Leaderboard({
 
       <CardContent className="overflow-y-auto">
         <Table className="table-fixed">
-          <TableHeader className="md:sticky md:top-0 md:bg-background">
+          <TableHeader className="md:bg-background md:sticky md:top-0">
             <TableRow>
               <TableHead className="w-20">Rank</TableHead>
               <TableHead>Book</TableHead>
@@ -95,7 +95,7 @@ export function Leaderboard({
             {sortedBooks.map((book, index) => (
               <TableRow
                 key={book.bookId}
-                className="transition-colors hover:bg-muted/50"
+                className="hover:bg-muted/50 transition-colors"
               >
                 <TableCell>
                   <div
@@ -114,7 +114,7 @@ export function Leaderboard({
                   </div>
                 </TableCell>
 
-                <TableCell className="text-right flex gap-2 font-semibold justify-between">
+                <TableCell className="flex justify-between gap-2 text-right font-semibold">
                   {book.rating.toFixed(0)}
                   <ConfidenceRing
                     size={22}

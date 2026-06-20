@@ -65,7 +65,7 @@ export default function VotingArea({
 
   return (
     matchup && (
-      <div className="h-full w-full min-h-0 grid gap-4 grid-rows-[1fr_auto_1fr] grid-cols-1 md:grid-rows-1 md:grid-cols-[1fr_auto_1fr]">
+      <div className="grid h-full min-h-0 w-full grid-cols-1 grid-rows-[1fr_auto_1fr] gap-4 md:grid-cols-[1fr_auto_1fr] md:grid-rows-1">
         <BookVoteCard
           book={matchup.bookA}
           handleVote={() =>
@@ -74,24 +74,24 @@ export default function VotingArea({
           onRemoveBook={() => removeBook(matchup.bookA.bookId)}
         />
 
-        <div className="flex flex-row md:flex-col items-center justify-center gap-2">
+        <div className="flex flex-row items-center justify-center gap-2 md:flex-col">
           <Button
             variant="ghost"
             disabled={!hasUndo}
             onClick={handleUndo}
             className={cn(
-              "w-14 border border-dashed ring-1 dark:ring-2 ring-muted-foreground/20 hover:ring-muted-foreground/40 hover:bg-muted/30 transition-all",
+              "ring-muted-foreground/20 hover:ring-muted-foreground/40 hover:bg-muted/30 w-14 border border-dashed ring-1 transition-all dark:ring-2",
               // Diagonal lines if not available
               hasUndo
                 ? ""
                 : "bg-[repeating-linear-gradient(135deg,rgba(120,120,120,0.25)_0px,rgba(120,120,120,0.25)_4px,transparent_4px,transparent_8px)] dark:bg-[repeating-linear-gradient(135deg,rgba(120,120,120,0.75)_0px,rgba(120,120,120,0.75)_4px,transparent_4px,transparent_8px)]",
             )}
           >
-            <Delete className="w-6! h-6!" />
+            <Delete className="h-6! w-6!" />
           </Button>
-          <div className="hidden md:flex flex-col rounded-full bg-background px-3 py-2 items-center">
+          <div className="bg-background hidden flex-col items-center rounded-full px-3 py-2 md:flex">
             <Swords size={20} />
-            <p className="text-xs text-muted-foreground tracking-widest">VS</p>
+            <p className="text-muted-foreground text-xs tracking-widest">VS</p>
           </div>
         </div>
 

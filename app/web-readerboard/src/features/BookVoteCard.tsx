@@ -14,29 +14,31 @@ export default function BookVoteCard({
   onRemoveBook: () => void;
 }) {
   return (
-    <Card className="transition-all w-full hover:shadow-lg hover:-translate-y-1 p-0 md:p-2 dark:border dark:border-border">
+    <Card className="dark:border-border w-full p-0 transition-all hover:-translate-y-1 hover:shadow-lg md:p-2 dark:border">
       <CardContent
-        className="min-h-0 h-full w-full md:items-center relative flex md:flex-col flex-1 p-2 cursor-pointer"
+        className="relative flex h-full min-h-0 w-full flex-1 cursor-pointer p-2 md:flex-col md:items-center"
         onClick={handleVote}
       >
         <BookCover book={book} />
 
-        <div className="min-w-0 flex flex-col gap-1 p-4 flex-1 w-full min-h-0 md:flex-none">
+        <div className="flex min-h-0 w-full min-w-0 flex-1 flex-col gap-1 p-4 md:flex-none">
           <div className="flex flex-col gap-1">
-            <h3 className="font-semibold leading-tight text-base md:text-xl line-clamp-3 md:line-clamp-2">
+            <h3 className="line-clamp-3 text-base leading-tight font-semibold md:line-clamp-2 md:text-xl">
               {book.title}
             </h3>
-            <p className="text-muted-foreground md:text-lg line-clamp-1">{book.author}</p>
+            <p className="text-muted-foreground line-clamp-1 md:text-lg">
+              {book.author}
+            </p>
           </div>
         </div>
       </CardContent>
 
-      <CardFooter className="hidden md:flex border-t px-4 py-3 shrink-0">
+      <CardFooter className="hidden shrink-0 border-t px-4 py-3 md:flex">
         <Button
           variant="ghost"
           size="sm"
           onClick={onRemoveBook}
-          className="ml-auto text-destructive hover:text-destructive"
+          className="text-destructive hover:text-destructive ml-auto"
         >
           <Trash2 className="mr-2 h-4 w-4" />
           Stop including this book

@@ -52,12 +52,12 @@ export default function StartPage() {
   };
 
   return (
-    <div className="container mx-auto flex-row max-w-3xl justify-center p-6">
-      <div className="flex flex-col items-center pt-4 space-y-4 text-center">
+    <div className="container mx-auto max-w-3xl flex-row justify-center p-6">
+      <div className="flex flex-col items-center space-y-4 pt-4 text-center">
         <ThemeSwitch />
         <h1 className="text-5xl font-bold tracking-tight">📚 Readerboard</h1>
 
-        <p className="mx-auto mt-3 max-w-lg text-lg text-muted-foreground">
+        <p className="text-muted-foreground mx-auto mt-3 max-w-lg text-lg">
           Compare books head-to-head and automatically build your personalized
           reading leaderboard.
         </p>
@@ -69,7 +69,7 @@ export default function StartPage() {
             <CardContent className="flex flex-col p-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h3 className="font-medium">Saved session found</h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                   Continue ranking where you left off.
                 </p>
               </div>
@@ -96,7 +96,7 @@ export default function StartPage() {
                   href="https://goodreads.com/review/import"
                   rel="noreferrer"
                   target="_blank" // new tab
-                  className="inline-flex items-center gap-1 text-primary underline underline-offset-4 hover:text-primary/80"
+                  className="text-primary hover:text-primary/80 inline-flex items-center gap-1 underline underline-offset-4"
                 >
                   exported Goodreads library
                   <ExternalLink size={14} />
@@ -119,24 +119,24 @@ export default function StartPage() {
 
         {/* Restore */}
         <div className="space-y-3">
-          <h3 className="text-center text-sm font-medium text-muted-foreground">
+          <h3 className="text-muted-foreground text-center text-sm font-medium">
             Or restore previous results
           </h3>
 
           <Card
-            className="cursor-pointer transition-all hover:border-primary hover:shadow-md"
+            className="hover:border-primary cursor-pointer transition-all hover:shadow-md"
             onClick={() => sessionInputRef.current?.click()}
           >
             <CardContent className="flex items-center justify-between p-5">
               <div>
                 <div className="font-medium">Import Saved Results</div>
 
-                <div className="text-sm text-muted-foreground">
+                <div className="text-muted-foreground text-sm">
                   Resume from an exported ranking session.
                 </div>
               </div>
 
-              <ArrowRight className="h-5 w-5 text-muted-foreground" />
+              <ArrowRight className="text-muted-foreground h-5 w-5" />
             </CardContent>
           </Card>
         </div>
