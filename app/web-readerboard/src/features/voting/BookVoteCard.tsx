@@ -17,7 +17,7 @@ const variants = {
   },
   removing: {
     opacity: 0,
-    rotate: 20,
+    rotate: -90,
     y: 400,
   },
   winning: {
@@ -44,7 +44,7 @@ export default function BookVoteCard({
 }) {
   return (
     <motion.div
-      className="min-h-0"
+      className="flex min-h-0"
       variants={variants}
       animate={animationState}
       transition={{ duration: 0.3 }}
