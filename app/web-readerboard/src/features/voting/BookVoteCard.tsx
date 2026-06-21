@@ -5,20 +5,16 @@ import type { Book } from "@/types/wasm";
 import BookCover from "./BookCover";
 import { motion } from "motion/react";
 
-type AnimationState = "idle" | "removing" | "fading" | "winning" | "losing";
 const variants = {
-  idle: {
-    opacity: 1,
-    rotate: 0,
-    y: 0,
-  },
+  idle: {},
   fading: {
     opacity: 0,
   },
   removing: {
+    y: 50,
     opacity: 0,
-    rotate: -90,
-    y: 400,
+    scale: 0.1,
+    rotateZ: 240,
   },
   winning: {
     scale: 1.12,
@@ -26,10 +22,12 @@ const variants = {
     opacity: 1,
   },
   losing: {
-    scale: 0,
-    opacity: 0.4,
+    scale: 0.92,
+    y: 12,
+    opacity: 0,
   },
 };
+export type VoteCardAnimationState = keyof typeof variants;
 
 export default function BookVoteCard({
   book,
@@ -38,7 +36,7 @@ export default function BookVoteCard({
   onRemoveBook,
 }: {
   book: Book;
-  animationState?: AnimationState;
+  animationState?: VoteCardAnimationState;
   handleVote: () => void;
   onRemoveBook: () => void;
 }) {
@@ -47,7 +45,7 @@ export default function BookVoteCard({
       className="flex min-h-0"
       variants={variants}
       animate={animationState}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
     >
       <Card className="dark:border-border min-h-0 w-full p-0 transition-all hover:-translate-y-1 hover:shadow-lg md:p-2 dark:border">
         <CardContent

@@ -1,10 +1,9 @@
 import { type Matchup, wasmInstance, type BookId } from "@/types/wasm";
-import BookVoteCard from "./BookVoteCard";
+import BookVoteCard, { type VoteCardAnimationState } from "./BookVoteCard";
 import { useEffect, useState } from "react";
 import { Delete, FastForward, Swords } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn, withTimeout } from "@/lib/utils";
-import { motion } from "motion/react";
+import { cn, applyWithDelay } from "@/lib/utils";
 
 export default function VotingArea({
   refreshLeaderboard,
@@ -17,8 +16,10 @@ export default function VotingArea({
   );
 
   // For animation
-  const [removingId, setRemovingId] = useState<BookId | null>(null);
-  const [winningId, setWinningId] = useState<BookId | null>(null);
+  const [voteState, setVoteState] = useState<{
+    state: "vote" | "remove";
+    target: BookId;
+  } | null>(null);
 
   const [hasUndo, setHasUndo] = useState(false);
   const handleUndo = () => {
@@ -57,10 +58,10 @@ export default function VotingArea({
   };
 
   const chooseWinner = async (winner: BookId, loser: BookId) => {
-    await withTimeout(
-      () => setWinningId(winner),
-      () => setWinningId(null),
+    await applyWithDelay(
+      () => setVoteState({ state: "vote", target: winner }),
       200,
+      () => setVoteState(null),
     );
 
     wasmInstance.storeMatchupResult(winner, loser, 1);
@@ -69,10 +70,10 @@ export default function VotingArea({
   };
 
   const removeBook = async (id: string) => {
-    await withTimeout(
-      () => setRemovingId(id),
-      () => setRemovingId(null),
+    await applyWithDelay(
+      () => setVoteState({ state: "remove", target: id }),
       200,
+      () => setVoteState(null),
     );
 
     wasmInstance.removeBook(id);
@@ -80,12 +81,13 @@ export default function VotingArea({
     setHasUndo(true);
   };
 
-  const getAnimationState = (bookId: BookId) => {
-    if (removingId === bookId) return "removing";
-    else if (winningId === bookId) return "winning";
-    else if (removingId) return "fading";
-    else if (winningId) return "losing";
-    else return "idle";
+  const getAnimationState = (bookId: BookId): VoteCardAnimationState => {
+    if (!voteState) return "idle";
+    else if (voteState.state == "vote") {
+      return voteState.target === bookId ? "winning" : "losing";
+    } else {
+      return voteState.target === bookId ? "removing" : "fading";
+    }
   };
 
   return (

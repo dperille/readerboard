@@ -5,12 +5,14 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export async function withTimeout(
-  before: (...inputs: any[]) => any,
-  after: (...inputs: any[]) => any,
+export async function applyWithDelay<T>(
+  apply: () => T,
   timeout: number,
+  cleanup: () => void,
 ) {
-  before();
+  const result = apply();
   await new Promise((resolve) => setTimeout(resolve, timeout));
-  after();
+  cleanup();
+
+  return result;
 }
