@@ -31,6 +31,14 @@ export default function BookVoteCard({
             </p>
           </div>
         </div>
+
+        <Button
+          variant="ghost"
+          className="text-destructive hover:text-destructive absolute right-2 bottom-2 md:hidden"
+          onClick={onRemoveBook}
+        >
+          <Trash2 className="h-6! w-6!" />
+        </Button>
       </CardContent>
 
       <CardFooter className="hidden shrink-0 border-t px-4 py-3 md:flex">
