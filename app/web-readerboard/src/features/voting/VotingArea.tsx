@@ -3,7 +3,8 @@ import BookVoteCard from "./BookVoteCard";
 import { useEffect, useState } from "react";
 import { Delete, FastForward, Swords } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, withTimeout } from "@/lib/utils";
+import { motion } from "motion/react";
 
 export default function VotingArea({
   refreshLeaderboard,
@@ -14,6 +15,10 @@ export default function VotingArea({
   const [nextMatchup, setNextMatchup] = useState<Matchup | undefined>(
     undefined,
   );
+
+  // For animation
+  const [removingId, setRemovingId] = useState<BookId | null>(null);
+  const [winningId, setWinningId] = useState<BookId | null>(null);
 
   const [hasUndo, setHasUndo] = useState(false);
   const handleUndo = () => {
@@ -51,16 +56,36 @@ export default function VotingArea({
     img.src = `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`;
   };
 
-  const chooseWinner = (winner: BookId, loser: BookId) => {
+  const chooseWinner = async (winner: BookId, loser: BookId) => {
+    await withTimeout(
+      () => setWinningId(winner),
+      () => setWinningId(null),
+      200,
+    );
+
     wasmInstance.storeMatchupResult(winner, loser, 1);
     getMatchup();
     setHasUndo(true);
   };
 
-  const removeBook = (id: string) => {
+  const removeBook = async (id: string) => {
+    await withTimeout(
+      () => setRemovingId(id),
+      () => setRemovingId(null),
+      200,
+    );
+
     wasmInstance.removeBook(id);
     getMatchup();
     setHasUndo(true);
+  };
+
+  const getAnimationState = (bookId: BookId) => {
+    if (removingId === bookId) return "removing";
+    else if (winningId === bookId) return "winning";
+    else if (removingId) return "fading";
+    else if (winningId) return "losing";
+    else return "idle";
   };
 
   return (
@@ -68,6 +93,7 @@ export default function VotingArea({
       <div className="grid h-full min-h-0 w-full grid-cols-1 grid-rows-[1fr_auto_1fr] gap-4 md:grid-cols-[1fr_auto_1fr] md:grid-rows-1">
         <BookVoteCard
           book={matchup.bookA}
+          animationState={getAnimationState(matchup.bookA.bookId)}
           handleVote={() =>
             chooseWinner(matchup.bookA.bookId, matchup.bookB.bookId)
           }
@@ -79,7 +105,7 @@ export default function VotingArea({
             <Swords size={20} />
             <p className="text-muted-foreground text-xs tracking-widest">VS</p>
           </div>
-          <div className="flex flex-1 justify-center md:flex-col md:justify-end gap-2">
+          <div className="flex flex-1 justify-center gap-2 md:flex-col md:justify-end">
             <Button
               variant="ghost"
               onClick={getMatchup}
@@ -106,6 +132,7 @@ export default function VotingArea({
 
         <BookVoteCard
           book={matchup.bookB}
+          animationState={getAnimationState(matchup.bookB.bookId)}
           handleVote={() =>
             chooseWinner(matchup.bookB.bookId, matchup.bookA.bookId)
           }
