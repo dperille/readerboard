@@ -47,7 +47,7 @@ function CoverImage({ book }: { book: Book }) {
       {/* Blur background */}
       <img
         src={coverUrl}
-        className="absolute h-full w-full scale-600 opacity-30 blur-xl"
+        className="absolute h-full w-full scale-600 opacity-30 blur-xl pointer-events-none"
         aria-hidden
       />
 
