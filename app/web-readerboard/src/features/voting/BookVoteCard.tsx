@@ -68,7 +68,10 @@ export default function BookVoteCard({
           <Button
             variant="ghost"
             className="text-destructive hover:text-destructive absolute right-2 bottom-2 md:hidden"
-            onClick={onRemoveBook}
+            onClick={(e) => {
+              e.stopPropagation();
+              onRemoveBook();
+            }}
           >
             <Trash2 className="h-6! w-6!" />
           </Button>
