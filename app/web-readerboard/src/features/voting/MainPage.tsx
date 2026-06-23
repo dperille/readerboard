@@ -5,6 +5,8 @@ import VotingArea from "./VotingArea";
 import { useNavigate } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
+const AUTO_SAVE_FREQ_SEC = 10;
+
 export default function MainPage() {
   const navigate = useNavigate();
 
@@ -13,6 +15,14 @@ export default function MainPage() {
   useEffect(() => {
     refreshLeaderboard();
   }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(
+      () => localStorage.setItem("session", JSON.stringify(data)),
+      AUTO_SAVE_FREQ_SEC * 1000,
+    );
+    return () => clearInterval(intervalId);
+  });
 
   const refreshLeaderboard = () => {
     const updatedStats = wasmInstance.getRankingData();
