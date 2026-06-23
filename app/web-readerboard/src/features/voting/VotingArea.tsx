@@ -60,7 +60,7 @@ export default function VotingArea({
   const chooseWinner = async (winner: BookId, loser: BookId) => {
     await applyWithDelay(
       () => setVoteState({ state: "vote", target: winner }),
-      200,
+      300,
       () => setVoteState(null),
     );
 
@@ -72,7 +72,7 @@ export default function VotingArea({
   const removeBook = async (id: string) => {
     await applyWithDelay(
       () => setVoteState({ state: "remove", target: id }),
-      200,
+      300,
       () => setVoteState(null),
     );
 
@@ -94,6 +94,7 @@ export default function VotingArea({
     matchup && (
       <div className="grid h-full min-h-0 w-full grid-cols-1 grid-rows-[1fr_auto_1fr] gap-4 md:grid-cols-[1fr_auto_1fr] md:grid-rows-1">
         <BookVoteCard
+          key={matchup.bookA.bookId}
           book={matchup.bookA}
           animationState={getAnimationState(matchup.bookA.bookId)}
           handleVote={() =>
@@ -133,6 +134,7 @@ export default function VotingArea({
         </div>
 
         <BookVoteCard
+          key={matchup.bookB.bookId}
           book={matchup.bookB}
           animationState={getAnimationState(matchup.bookB.bookId)}
           handleVote={() =>

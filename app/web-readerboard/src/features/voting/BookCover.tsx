@@ -1,12 +1,17 @@
 import type { Book } from "@/types/wasm";
+import { useState } from "react";
 
 export default function BookCover({ book }: { book: Book }) {
+  const [coverStatus, setCoverStatus] = useState<
+    "loading" | "success" | "failed"
+  >("loading");
+  console.log(book.title + coverStatus);
+
   return (
     <div className="relative aspect-2/3 min-h-0 w-28 md:w-48 lg:w-78">
-      {book.isbn.length > 0 ? (
-        <CoverImage book={book} />
-      ) : (
-        <DefaultCover book={book} />
+      {coverStatus !== "success" && <DefaultCover book={book} />}
+      {book.isbn.length > 0 && coverStatus !== "failed" && (
+        <CoverImage book={book} setCoverStatus={setCoverStatus} />
       )}
     </div>
   );
@@ -40,18 +45,36 @@ function DefaultCover({ book }: { book: Book }) {
   );
 }
 
-function CoverImage({ book }: { book: Book }) {
+function CoverImage({
+  book,
+  setCoverStatus,
+}: {
+  book: Book;
+  setCoverStatus: (status: "success" | "failed") => void;
+}) {
   const coverUrl = `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`;
+  const handleLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    // OpenLibrary often returns a 1×1 GIF when no cover exists, so can't solely rely on error/404
+    console.log(book.title + "width" + e.currentTarget.naturalWidth);
+    if (e.currentTarget.naturalWidth <= 1) setCoverStatus("failed");
+    else setCoverStatus("success");
+  };
+
   return (
     <>
       {/* Blur background */}
       <img
         src={coverUrl}
-        className="absolute h-full w-full scale-600 opacity-30 blur-xl pointer-events-none"
+        className="pointer-events-none absolute h-full w-full scale-600 opacity-30 blur-xl"
         aria-hidden
       />
 
-      <img src={coverUrl} className="absolute h-full w-full object-contain" />
+      <img
+        src={coverUrl}
+        className="absolute h-full w-full object-contain"
+        onError={() => setCoverStatus("failed")}
+        onLoad={handleLoad}
+      />
     </>
   );
 }
