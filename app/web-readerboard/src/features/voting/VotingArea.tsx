@@ -77,6 +77,9 @@ export default function VotingArea({
     );
 
     wasmInstance.removeBook(id);
+    if (nextMatchup?.bookA.bookId === id || nextMatchup?.bookB.bookId === id) {
+      setNextMatchup(undefined);
+    }
     getMatchup();
     setHasUndo(true);
   };
