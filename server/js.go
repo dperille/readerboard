@@ -14,7 +14,7 @@ func jsAddBooksFromCSV(s *Server) js.Func {
 		}
 		csvText := args[0].String()
 
-		books, err := parseBooksRead(csvText)
+		books, err := parseLibraryCSV(csvText)
 		if err != nil {
 			return err.Error()
 		}

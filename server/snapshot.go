@@ -13,7 +13,7 @@ func (s *Server) addBooks(books []Book) {
 	}
 }
 
-func parseBooksRead(text string) ([]Book, error) {
+func parseLibraryCSV(text string) ([]Book, error) {
 	reader := csv.NewReader(strings.NewReader(text))
 
 	// TODO - use header

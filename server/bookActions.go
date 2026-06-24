@@ -2,7 +2,6 @@ package main
 
 import (
 	"maps"
-	"math/rand"
 )
 
 func (s *Server) storeMatchupResult(idA BookID, idB BookID, result float64) {
@@ -23,27 +22,6 @@ func (s *Server) storeMatchupResult(idA BookID, idB BookID, result float64) {
 		},
 	})
 	maps.Copy(s.RatingData, updatedBooks)
-}
-
-func (s *Server) randomBook() Book {
-	idx := rand.Intn(len(s.RatingData))
-	var book Book
-	for _, b := range s.RatingData {
-		if idx == 0 {
-			book = b
-			break
-		}
-		idx--
-	}
-	return book
-}
-
-func (s *Server) chooseMatchup() Matchup {
-	// TODO - better matchup selection
-	return Matchup{
-		s.randomBook(),
-		s.randomBook(),
-	}
 }
 
 func (s *Server) removeBook(id BookID) {
