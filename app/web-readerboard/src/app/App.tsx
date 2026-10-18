@@ -4,6 +4,7 @@ import MainPage from "@/features/voting/MainPage";
 import StartPage from "@/features/landing/StartPage";
 import { Route, Routes } from "react-router-dom";
 import RequireSession from "@/app/RequireSession";
+import { LoaderCircle, Radius } from "lucide-react";
 
 function App() {
   const [loadedWasm, setLoadedWasm] = useState(false);
@@ -25,7 +26,17 @@ function App() {
   }, []);
 
   if (!loadedWasm) {
-    return <div>Loading...</div>;
+    return (
+      <div className="bg-background flex min-h-screen flex-col items-center justify-center gap-4">
+        <div className="bg-card rounded-2xl border p-4 shadow-sm">
+          <Radius className="text-primary h-16 w-16 animate-spin" />
+        </div>
+
+        <div className="space-y-1 text-center">
+          <h2 className="text-lg font-semibold">Getting things ready</h2>
+        </div>
+      </div>
+    );
   }
 
   return (
