@@ -4,7 +4,7 @@ import MainPage from "@/features/voting/MainPage";
 import StartPage from "@/features/landing/StartPage";
 import { Route, Routes } from "react-router-dom";
 import RequireSession from "@/app/RequireSession";
-import { LoaderCircle, Radius } from "lucide-react";
+import { Radius } from "lucide-react";
 
 function App() {
   const [loadedWasm, setLoadedWasm] = useState(false);
